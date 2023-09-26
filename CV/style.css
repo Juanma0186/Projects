@@ -16,7 +16,7 @@ body {
 
 .cv {
   max-width: 600px;
-  height: calc(100vh - 100px);
+  height: fit-content;
   margin: auto;
   background: #fff;
   display: grid;
