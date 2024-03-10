@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Todos los chats</h2>
+
+  {% for chat in chats %}
+    <a href="{% url 'chat' chat.id %}">{{ chat.name }}</a>
+  {% endfor %}
+{% endblock %}

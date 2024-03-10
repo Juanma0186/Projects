@@ -1,0 +1,82 @@
+<main class="p-4">
+  <section class="flex items-center justify-between mt-6 animate-fade-down">
+    <h2 class="h-full text-2xl font-semibold text-process_cyan-500">
+      Listado de Ciudadanos
+    </h2>
+
+    <form class="flex max-w-[350px]">
+      <input
+        class="flex-1 p-2 border-2 border-r-0 rounded-l-md focus:outline-none dark:bg-neutral-600 dark:text-white dark:placeholder:text-white/70 "
+        type="text" placeholder="Introduce un ciudadano" #filter (keyup)="filterResults(filter.value)" />
+      <div
+        class="flex items-center justify-center px-4 font-medium border-2 select-none gap-x-2 text-process_cyan-500 rounded-r-md"
+        type="button">
+        <span class="material-icons ">
+          search
+        </span>
+      </div>
+    </form>
+  </section>
+  <section class="mt-6 divide-y-2 dark:divide-white/70 divide-neutral-200 animate-fade-down animate-delay-[400ms]">
+    @if (ciudadanosFiltrados !== undefined && ciudadanosFiltrados.length > 0) {
+    @for (ciudadano of ciudadanosFiltrados; track $index) {
+    <details name="promotor"
+      class="first:rounded-t-xl last:rounded-b-xl bg-white dark:bg-neutral-600 [&_svg]:open:-rotate-180 transition-all duration-300">
+      <!-- notice here, we have disabled the summary's default triangle/arrow -->
+      <summary class="flex items-center justify-between px-4 py-2 cursor-pointer">
+        <span class="text-xl dark:text-white/90">{{ciudadano.last_name}}, {{ciudadano.first_name | titlecase}}</span>
+        <svg class="transition-all duration-300 transform rotate-0 text-process_cyan-500" width="24" height="24"
+          fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          viewBox="0 0 24 24">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </summary>
+
+      <div
+        class="flex flex-col w-full p-6 overflow-hidden transition-all duration-300 border-t-2 bg-neutral-200 dark:bg-neutral-500 gap-y-2 border-process_cyan-500">
+        <div class="flex items-center justify-between w-full ">
+          <a [routerLink]="['/ciudadano', ciudadano.username]"
+            class="text-2xl dark:text-white hover:underline">{{ciudadano.last_name | titlecase}},
+            {{ciudadano.first_name| titlecase}}</a>
+          <a [routerLink]="['/entidad', ciudadano.entidad?.toLowerCase()]"
+            class="flex items-center text-xl gap-x-2 dark:text-white hover:underline">
+            <img class="bg-white border-2 rounded-full size-10 cover dark:border-white"
+              src="assets/bancos/{{ciudadano.entidad | lowercase}}.webp" alt="Logo del banco {{ciudadano.entidad}}">
+            {{ciudadano.entidad | uppercase}}</a>
+        </div>
+        <div>
+          <h3 class="w-full px-4 py-2 text-lg text-white bg-process_cyan-500 rounded-t-xl">
+            Historial
+          </h3>
+          <table class="w-full overflow-hidden shadow-md rounded-b-xl">
+            <thead class="dark:bg-neutral-600 bg-neutral-400">
+              <tr class="divide-x-2 divide-white">
+                <th class="px-6 py-3 font-medium tracking-wider text-center text-white uppercase dark:text-white/70">
+                  Promotor</th>
+                <th class="px-6 py-3 font-medium tracking-wider text-center text-white uppercase dark:text-white/70">
+                  Mes
+                </th>
+                <th class="px-6 py-3 font-medium tracking-wider text-center text-white uppercase dark:text-white/70">
+                  Aportación</th>
+              </tr>
+            </thead>
+            <tbody class="text-center bg-white divide-y divide-gray-200">
+              @for (aportacion of aportacionesPorCiudadano[ciudadano.username]; track $index) {
+              <tr>
+                <td class="px-6 py-4 text-sm whitespace-nowrap ">{{aportacion.promotor}}</td>
+                <td class="px-6 py-4 text-sm whitespace-nowrap">{{aportacion.mes}}</td>
+                <td class="px-6 py-4 text-sm whitespace-nowrap">{{aportacion.cantidad | currency:'EUR'}}</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+
+    }
+    }@else {
+    <p class="text-center dark:text-white/70">No se encontraron resultados</p>
+    }
+  </section>
+</main>

@@ -1,0 +1,169 @@
+<main class="min-h-[calc(100vh_-_75px)] bg-[#f2f6fc] dark:dark:bg-neutral-700 overflow-x-hidden">
+  @if (currentUserEntries && currentUserEntries.length > 0) {
+  <h2 class="py-6 pl-6 text-4xl font-semibold dark:text-white ">
+    Información de <span
+      class="italic font-bold">{{currentUserEntries[0].promotor || nombrePromotor?.toUpperCase()}}</span>
+  </h2>
+
+  <!--Info Cards-->
+  <section class="flex flex-wrap items-start justify-start gap-6 p-6">
+
+    <!--Card Total-->
+    <article class="overflow-hidden rounded-lg shadow-xl animate-fade-left bg-neutral-100 dark:bg-neutral-600">
+      <h3 class="flex items-center justify-start w-full p-4 font-semibold gap-x-2 bg-turquoise-500">
+        <span class="-translate-y-[1.5px] material-icons">
+          euro_symbol
+        </span>
+        Total aportado
+      </h3>
+      <div class="flex flex-col items-start justify-center p-6 gap-x-2">
+        <p class="w-full text-2xl font-semibold text-center text-turquoise-500">
+          {{totalAportado | currency:'EUR'}}
+        </p>
+      </div>
+    </article>
+
+    <!--Card Ultima Aportación-->
+    <article
+      class="overflow-hidden rounded-lg shadow-xl bg-neutral-100 animate-fade-left animate-delay-200 dark:bg-neutral-600">
+      <h3 class="flex items-center justify-start w-full p-4 font-semibold gap-x-2 bg-steel_pink-500">
+        <span class="-translate-y-[1.5px] material-icons">
+          event_available
+        </span>
+        Última aportación realizada
+      </h3>
+      <div class="flex flex-col items-start justify-center p-6 gap-x-2">
+        <p class="w-full text-xl font-semibold text-left dark:text-white">
+          Usuario: <span class="text-steel_pink-500">{{ultimaAportacion?.usuario | titlecase}}</span>
+        </p>
+        <p class="w-full text-xl font-semibold text-left dark:text-white">
+          Banco: <span class="text-steel_pink-500">{{ultimaAportacion?.entidad | titlecase}}</span>
+        </p>
+        <p class="w-full text-xl font-semibold text-left dark:text-white">
+          Mes: <span class="text-steel_pink-500">{{ultimaAportacion?.mes}}</span>
+        </p>
+        <p class="w-full text-xl font-semibold text-left dark:text-white">
+          Cantidad: <span class="text-steel_pink-500">{{ultimaAportacion?.cantidad | currency:'EUR'}}</span>
+        </p>
+      </div>
+    </article>
+
+    <!--Card Max Aportación-->
+    <article
+      class="overflow-hidden rounded-lg shadow-xl bg-neutral-100 animate-fade-left animate-delay-300 dark:bg-neutral-600">
+      <h3 class="flex items-center justify-start w-full p-4 font-semibold gap-x-2 bg-amber-500">
+        <span class="-translate-y-[1.5px] material-icons">
+          trending_up
+        </span>
+        Máxima aportación realizada
+      </h3>
+      <div class="flex flex-col items-start justify-center p-6 gap-x-2">
+        <p class="w-full text-xl font-semibold text-left dark:text-white">
+          Cantidad: <span class="text-amber-500">{{maxAportacion | currency:'EUR'}}</span>
+        </p>
+      </div>
+    </article>
+
+  </section>
+
+  <!--Table-->
+  <section class="flex flex-wrap items-start justify-start w-full gap-6 p-6">
+    <div
+      class="flex-1 min-w-[400px] overflow-hidden rounded-lg animate-fade-left animate-delay-500 shadow-xl bg-neutral-100 dark:bg-neutral-600">
+      <h3 class="flex items-center justify-start w-full p-4 font-semibold gap-x-2 bg-bright_pink_(crayola)-500">
+        <span class="-translate-y-[1.5px] material-icons">
+          history
+        </span>
+        Historial de aportaciones
+      </h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-center">
+          <thead class="">
+            <tr>
+              <th class="px-6 py-3 font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white/70">
+                Beneficiario</th>
+              <th class="px-6 py-3 font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white/70">
+                Entidad Financiera
+              </th>
+              <th class="px-6 py-3 font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white/70">
+                Mes</th>
+              <th class="px-6 py-3 font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white/70">
+                Aportaciones Mensuales</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y-2 dark:divide-neutral-600 bg-neutral-300 dark:bg-neutral-500">
+            @for (data of currentPromotorData; track $index) {
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-lg text-gray-900 dark:text-white">{{data.last_name | titlecase}},
+                  {{data.usuario | titlecase}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-lg text-gray-900 dark:text-white">{{data.entidad | uppercase}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-lg text-gray-900 dark:text-white">{{data.mes}}
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-lg text-gray-900 dark:text-white">{{data.cantidad | currency:'EUR'}}</div>
+              </td>
+              }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div
+      class="flex-1 min-w-[300px] overflow-hidden rounded-lg shadow-xl animate-fade-left animate-delay-[700ms] bg-neutral-100 dark:bg-neutral-600">
+      <h3 class="flex items-center justify-start w-full p-4 font-semibold gap-x-2 bg-process_cyan-500">
+        <span class="-translate-y-[1.5px] material-icons">
+          people
+        </span>
+        Usuarios con aportaciones
+      </h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-center">
+          <thead class="">
+            <tr>
+              <th class="px-6 py-3 font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white/70">
+                Nombre</th>
+              <th class="px-6 py-3 font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white/70">
+                Apellido
+              </th>
+              <th class="px-6 py-3 font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white/70">
+                Entidad Financiera</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y-2 dark:divide-neutral-600 bg-neutral-300 dark:bg-neutral-500">
+            @for (data of listaUsuariosUnicos; track $index) {
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-lg text-gray-900 dark:text-white">{{data.first_name | titlecase}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-lg text-gray-900 dark:text-white">{{data.last_name | titlecase}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-lg text-gray-900 dark:text-white">{{data.entidad| titlecase}}
+                </div>
+              </td>
+              }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  }
+
+  @if (isAdmin) {
+  <button
+    class="fixed z-50 flex items-center justify-center px-4 py-2 text-white transition rounded-full shadow-md bottom-32 animate-fade-up animate-delay-500 right-4 size-12 material-icons bg-steel_pink-500 hover:bg-steel_pink-400"
+    (click)="goBack()">
+    arrow_back
+  </button>
+  }
+  <app-chat></app-chat>
+
+</main>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Gestor de Tareas creado con Express y SASS para DWEC y DIW ">
+  <meta name="keywords" content="HTML, CSS, SASS, EXPRESS, NODE, JS, GESTOR, TAREAS">
+  <meta name="author" content="Juan Manuel Suárez">
+  <link rel="shortcut icon" href="images/check.webp" type="image/x-icon">
+  <link rel="stylesheet preconnect" href=" https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+  <link rel="stylesheet preconnect" href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined">
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Gestor de Películas</title>
+</head>
+
+<body>
+  <!-- Título -->
+  <div id="titulo">
+    <h1>
+      <a title="Excalidraw del Gestor" href="https://excalidraw.com/#json=GFR1YVUHb6RhKvpcnsYLk,_flKk1P848uqiwL6K74zvA1"
+        target="_blank">
+        <i class="bi bi-square" id="icono-titulo"></i>&nbsp;&nbsp;
+      </a>
+      <span>GESTOR DE PELICULAS</span>
+    </h1>
+  </div>
+
+  <!--Botón limpiar tareas-->
+  <button id="limpiar" title="Limpiar todo">
+    <span class="material-icons-outlined">
+      delete_forever
+    </span>
+  </button>
+
+  <button id="atajosBoton" title="Atajos">
+    <span class="material-icons-outlined">
+      lightbulb
+    </span>
+  </button>
+
+  <button id="pdfGen" title="Generar PDF">
+    <span class="material-icons-outlined">
+      picture_as_pdf
+    </span>
+  </button>
+
+  <!-- Tablero -->
+  <div class="tablero">
+
+    <!--? Tareas Pendientes -->
+    <div class="tarjeta">
+      <h2>Pendientes</h2>
+      <hr />
+      <div class="tarea-container" id="todo">
+
+        <div id="crearTarea-container">
+          <div id="crearTarea">
+            <h3>
+              Crear Tarea
+            </h3>
+            <hr />
+            <form action="" method="" id="formularioCrear">
+              <div class="estado-container">
+                <input type="radio" name="estado" id="pendiente" value="todo" checked />
+                <label for="pendiente">Pendiente</label>
+
+                <input type="radio" name="estado" id="proceso" value="doing" />
+                <label for="proceso">No Recomendadas</label>
+
+                <input type="radio" name="estado" id="completada" value="done" />
+                <label for="completada">Favoritas</label>
+              </div>
+              <div class="textoNota">
+                <textarea title="Escribe tu nota" name="descripcion" id="nota" placeholder="Escribe aquí tu nota..."
+                  required></textarea>
+              </div>
+              <div>
+                <button type="button" id="crear">
+                  Crear
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div id="editarTarea-container">
+          <div id="editarTarea">
+            <h3 id="idTareaSeleccionada">
+              Editar Tarea
+            </h3>
+            <hr />
+            <form action="" method="" id="formularioEditar">
+              <div class="estado-container">
+                <input type="radio" name="estadoEditar" id="pendienteEditar" value="todo" />
+                <label for="pendienteEditar">Pendiente</label>
+
+                <input type="radio" name="estadoEditar" id="procesoEditar" value="doing" />
+                <label for="procesoEditar">No Recomendadas</label>
+
+                <input type="radio" name="estadoEditar" id="completadaEditar" value="done" />
+                <label for="completadaEditar">Favoritas</label>
+              </div>
+              <div class="textoNota">
+                <textarea title="Escribe tu nota" name="descripcionEditar" id="notaEditar"
+                  placeholder="Escribe aquí tu nota..." required></textarea>
+              </div>
+              <div>
+                <button type="button" id="actualizar">
+                  Actualizar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div id="atajos-container">
+          <div id="atajos">
+            <h3>
+              Atajos de Teclado
+            </h3>
+            <hr />
+            <div class="teclas">
+              <span><kbd>ESC</kbd>&nbsp;➜&nbsp;Cerrar</span>
+              <span><kbd>SHIFT</kbd>+<kbd>N</kbd>&nbsp;➜&nbsp;Crear nueva tarea</span>
+              <span><kbd>SHIFT</kbd>+<kbd>ENTER</kbd>&nbsp;➜&nbsp;Crear/Actualizar</span>
+              <span><kbd>CTRL</kbd>+<kbd>SUPR</kbd>&nbsp;➜&nbsp;Eliminar <span class="rojo">TODAS</span> las
+                tareas<span class="rojo">*</span></span>
+            </div>
+            <div>
+              <span class="rojo">* Se eliminarán sin un mensaje de aviso previo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tarea anadir" id="anadirTarea">
+          <img src="images/plus.svg" alt="Símbolo más para añadir tarea" class="plus-icon">
+          <p class="no-pin">Añadir Tarea</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!--! Tareas en Proceso -->
+    <div class="tarjeta">
+      <h2>No Recomendadas</h2>
+      <hr />
+      <div class="tarea-container" id="doing">
+      </div>
+    </div>
+
+    <!--* Tareas Completadas -->
+    <div class="tarjeta">
+      <h2>Favoritas</h2>
+      <hr />
+      <div class="tarea-container" id="done">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SCRIPTS -->
+
+  <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+  <script type="module" src="script/main.js"></script>
+
+  <!-- Generador PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+  <script type="module">
+    const pdfGen = document.getElementById("pdfGen");
+    const tablero = document.querySelector(".tablero");
+    const notyf = new Notyf(
+      {
+        position: {
+          x: 'center',
+          y: 'bottom'
+        },
+        types: [
+          {
+            type: 'success',
+            background: '#31de94',
+            icon: {
+              className: 'bi bi-check-circle',
+              tagName: 'i',
+              color: 'white'
+            }
+          }
+        ]
+      }
+    );
+
+    pdfGen.addEventListener("click", () => {
+      html2pdf()
+        .set({
+          margin: 0,
+          filename: 'Gestor de Tareas.pdf',
+          image: {
+            type: 'jpeg',
+            quality: 0.98
+          },
+          html2canvas: {
+            scale: 3,
+            letterRendering: true,
+          },
+          jsPDF: {
+            unit: "in",
+            format: "a3",
+            orientation: "landscape"
+          }
+        })
+        .from(tablero)
+        .save()
+        .catch(err => console.log(err))
+        .then(() => {
+          notyf.open({
+            duration: 0,
+            type: 'success',
+            background: "#27b17c",
+            icon: {
+              className: "bi bi-filetype-pdf",
+              tagName: 'i',
+              color: 'white'
+            },
+            ripple: true,
+            message: "PDF generado con éxito",
+            dismissible: true
+          })
+        });
+    })
+  </script>
+
+  <!-- Sonido de las teclas-->
+  <script>
+
+    const keystrokes = [...document.querySelectorAll("kbd")];
+    const hasKeys = keystrokes.length > 0;
+    let keySound;
+    keystrokes.forEach(key => key.addEventListener("click", () => {
+      if (hasKeys && !keySound) {
+        keySound = new Audio("./sounds/kbd.ogg");
+      }
+      keySound.currentTime = 0;
+      keySound.play();
+    }));
+
+  </script>
+
+</body>
+
+</html>

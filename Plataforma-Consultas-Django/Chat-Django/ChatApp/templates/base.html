@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+  {% load static tailwind_tags %}
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        Chat Djangular
+      {% endblock %}
+    </title>
+    {% tailwind_css %}
+  </head>
+  <body class="min-h-screen font-onest">
+    <header>
+      <nav class="min-h-[75px] sticky top-0 left-0 z-50 flex items-center justify-between w-full px-4 bg-white shadow-lg">
+        <a href="/" class="text-3xl font-bold">Chat Djangular</a>
+      </nav>
+    </header>
+
+    <main class="p-4 h-[calc(100vh_-_75px)]">
+      {% if request.path != '/' and request.path != '/login/' %}
+        <a class="fixed flex items-center justify-center transition duration-300 border-2 rounded-full shadow-xl text-process_cyan-500 border-process_cyan-500 bottom-4 left-4 hover:bg-process_cyan-500 hover:text-white material-icons size-12" href="{% url 'home' %}">home</a>
+      {% endif %}
+
+      {% block content %}
+
+      {% endblock %}
+    </main>
+  </body>
+</html>

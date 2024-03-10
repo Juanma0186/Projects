@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Gestor de Guardias</title>
+</head>
+
+<body class="flex items-center justify-center min-h-screen font-quicksand gap-y-10 bg-neutral-800">
+
+  <nav class="fixed top-0 w-full text-center">
+    <h1 class="p-4 text-3xl font-bold text-white uppercase bg-air_force_blue-500">Gestor de Guardias</h1>
+  </nav>
+
+  <main>
+    <form id="login-form" action="" method="post"
+      class="overflow-hidden min-w-[400px] border-4 shadow-lg rounded-2xl border-air_force_blue-500">
+
+      <h2 class="w-full px-4 py-2 text-2xl font-bold text-center text-white bg-air_force_blue-500">
+        Iniciar Sesión</h2>
+
+      <div class="flex flex-col items-center gap-4 py-6">
+
+        <div class="flex">
+          <span
+            class="inline-flex items-center px-3 text-sm border outline-none border-air_force_blue-500 bg-air_force_blue-500 rounded-e-0 rounded-s-md">
+            <span class="text-white material-icons">
+              account_circle
+            </span>
+          </span>
+          <input type="text" name="name" id="name"
+            class="rounded-none rounded-e-lg outline-none bg-neutral-700 text-white border-2 block flex-1 min-w-0 w-full text-sm border-air_force_blue-500 p-2.5 caret-air_force_blue-500"
+            placeholder="Usuario">
+        </div>
+
+        <div class="flex">
+          <span
+            class="inline-flex items-center px-3 text-sm border outline-none border-air_force_blue-500 bg-air_force_blue-500 rounded-e-0 rounded-s-md">
+            <span class="text-white material-icons">
+              key
+            </span>
+          </span>
+          <input type="password" name="password" id="password"
+            class="rounded-none rounded-e-lg outline-none bg-neutral-700 text-white border-2 block flex-1 min-w-0 w-full text-sm border-air_force_blue-500 p-2.5 caret-air_force_blue-500"
+            placeholder="Contraseña">
+        </div>
+
+        <button type="submit" value="Enviar"
+          class="flex flex-col items-center px-4 py-2 mt-2 text-white transition-all duration-300 rounded-lg cursor-pointer hover:scale-105 active:scale-95 bg-air_force_blue-500 ">
+          Iniciar sesión
+        </button>
+      </div>
+    </form>
+
+  </main>
+  <script type="module" src="scripts/main.js"></script>
+
+</html>

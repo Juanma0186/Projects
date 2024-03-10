@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h2>{{ chat.name }}</h2>
+<p>No te has unido a este chat todavía. ¿Te gustaría unirte?</p>
+{% if not user_is_participant %}
+    <button class="btn btn-primary mt-2" id="btnJoinChat">Unirse al chat</button>
+{% endif %}
+
+
+<script src="{% static '/js/chat.js' %}"></script>
+<script>
+var user = '{{ request.user }}'
+var chat_id = '{{ chat.id }}'
+</script>
+{% endblock content %}

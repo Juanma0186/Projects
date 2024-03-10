@@ -1,0 +1,55 @@
+<section class="flex flex-col p-6 gap-y-4">
+  <div>
+    <h2 class="text-4xl font-bold tracking-tight dark:text-white">
+      Panel de Administración
+    </h2>
+    <div class="h-1 rounded-full dark:bg-white"></div>
+    <p class="mt-4 text-xl dark:text-white text-pretty">
+      Bienvenido al panel de administración de PDC.
+      <br />
+      <br />
+      Selecciona una opción del menú lateral para comenzar a observar la información específica tanto de los ciudadanos
+      como de los
+      promotores y los bancos disponibles en nuestra aplicación.
+    </p>
+  </div>
+  <div>
+    <h2 class="text-4xl font-bold tracking-tight dark:text-white">Resumen General</h2>
+    <div class="flex flex-wrap w-full gap-6 p-6">
+
+      <!--Gráfico personas por banco-->
+      <div
+        class="flex flex-col overflow-hidden bg-white shadow-xl h-fit animate-fade-down animate-delay-300 rounded-xl dark:bg-neutral-500">
+        <h3 class="p-3 text-xl font-bold bg-turquoise-500 dark:text-white">Ciudadanos por banco</h3>
+        <div class="p-4" id="chartPersonasBanco">
+        </div>
+      </div>
+
+      <!--Gráfico dinero de bancos-->
+      <div
+        class="flex flex-col overflow-hidden bg-white shadow-xl h-fit animate-fade-down animate-delay-300 rounded-xl dark:bg-neutral-500">
+        <h3 class="p-3 text-xl font-bold bg-turquoise-500 dark:text-white">Dinero por banco</h3>
+        <div class="p-4" id="chartDineroBanco">
+        </div>
+      </div>
+
+      <!--Gráfico personas por promotor-->
+      <div
+        class="flex flex-col overflow-hidden bg-white shadow-xl h-fit animate-fade-down animate-delay-300 rounded-xl dark:bg-neutral-500">
+        <h3 class="p-3 text-xl font-bold bg-steel_pink-500 dark:text-white">Ciudadanos por promotor</h3>
+        <div class="p-4" id="chartPersonasPromotor">
+        </div>
+      </div>
+
+      <!--Gráfico dinero de promotores-->
+      <div
+        class="flex flex-col overflow-hidden bg-white shadow-xl h-fit animate-fade-down animate-delay-300 rounded-xl dark:bg-neutral-500">
+        <h3 class="p-3 text-xl font-bold bg-steel_pink-500 dark:text-white">Dinero aportado por promotor</h3>
+        <div class="p-4" id="chartAportacionesPromotor">
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>

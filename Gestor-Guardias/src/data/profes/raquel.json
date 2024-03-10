@@ -1,0 +1,42 @@
+[
+    {
+        "id": "8e671013-ccfc-40ba-8b03-0b279decd222",
+        "profesor": "raquel",
+        "dia": "martes",
+        "hora": "19:00",
+        "lugar": "salon 3",
+        "descripcion": "Martes, 19:00, salon 3"
+    },
+    {
+        "id": "8e671013-ccfc-40ba-8b03-0b279decd822",
+        "profesor": "raquel",
+        "dia": "miercoles",
+        "hora": "16:00",
+        "lugar": "biblioteca",
+        "descripcion": "Miercoles, 16:00, biblioteca"
+    },
+    {
+        "id": "8e671013-ccfc-40ba-8b03-0b279decd922",
+        "profesor": "raquel",
+        "dia": "jueves",
+        "hora": "20:00",
+        "lugar": "salon 4",
+        "descripcion": "Jueves, 20:00, salon 4"
+    },
+    {
+        "id": "8e671013-ccfc-40ba-8b03-0b279decd122",
+        "profesor": "raquel",
+        "dia": "viernes",
+        "hora": "18:00",
+        "lugar": "salon 2",
+        "descripcion": "Viernes, 18:00, salon 2"
+    },
+    {
+        "id": "92fad6f9-5ddd-4456-8bcc-fc5743497d80",
+        "profesor": "raquel",
+        "dia": "lunes",
+        "hora": "17:00",
+        "lugar": "salon 78",
+        "descripcion": "Lunes, 17:00"
+    }
+]

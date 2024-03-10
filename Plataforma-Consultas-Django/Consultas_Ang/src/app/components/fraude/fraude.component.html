@@ -1,0 +1,52 @@
+<div class="flex flex-col gap-y-4">
+  <button
+    class="flex items-center px-4 py-2 font-semibold transition rounded-lg shadow-lg animate-fade-left animate-delay-1000 bg-amber-500 hover:bg-amber-400 gap-x-2 w-fit"
+    (click)="detectarFraude()" id="botonFraude">
+    <span class="material-icons">
+      person_search
+    </span>
+    Detectar Fraude
+  </button>
+
+  @if(fraudes.length > 0){
+
+
+  <div
+    class="flex-1 min-w-[300px] overflow-hidden  animate-fade-left animate-delay-[700ms] rounded-lg shadow-xl bg-neutral-100 dark:bg-neutral-600">
+    <h3 class="flex items-center justify-start w-full p-4 font-semibold gap-x-2 bg-amber-500">
+      <span class="-translate-y-[1.5px] material-icons">
+        person_off
+      </span>
+      Fraudes existentes
+    </h3>
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="bg-gray-50 dark:bg-neutral-600">
+          <tr>
+            <th scope="col"
+              class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white/80">
+              Usuario
+            </th>
+            <th scope="col"
+              class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white/80">
+              Detalles del Fraude
+            </th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-900 bg-white divide-y divide-gray-200 dark:text-white dark:bg-neutral-500">
+          <tr *ngFor="let fraude of fraudes">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm ">{{ fraude.usuario | titlecase}}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm ">{{ fraude.mensaje }}</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  }
+
+</div>

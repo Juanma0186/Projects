@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <section class="w-[600px] mx-auto h-auto flex flex-col shadow-xl">
+    {% if 'ciudadano' in chat.name %}
+      <h2 class="flex items-center justify-center p-4 font-bold gap-x-2 bg-process_cyan-500 rounded-t-xl">
+        <span class="material-icons">person</span>
+        Ciudadano
+      </h2>
+    {% elif 'promotor' in chat.name %}
+      <h2 class="flex items-center justify-center p-4 font-bold gap-x-2 bg-steel_pink-500 rounded-t-xl">
+        <span class="material-icons">apartment</span>
+        Promotor
+      </h2>
+    {% else %}
+      <h2 class="flex items-center justify-center p-4 font-bold gap-x-2 bg-turquoise-500 rounded-t-xl">
+        <span class="material-icons">account_balance</span>
+        Banco
+      </h2>
+    {% endif %}
+    <hr />
+    <div id="boxMessages" class="flex-1 p-2 flex flex-col items-start justify-start overflow-y-auto gap-y-2 max-h-[70vh] min-h-[70vh]">
+      {% if messages %}
+        {% for message in messages %}
+          {% if message.sender.username == 'admin' %}
+            <p class="self-end px-4 py-2 rounded-xl max-w-[70%] bg-gray-200 flex flex-col gap-y-2">
+              {{ message.content }}
+              <span class="self-end text-sm text-gray-600">{{ message.timestamp }}</span>
+            </p>
+          {% elif message.sender.username == 'ciudadano' %}
+            <p class="self-start px-4 py-2 rounded-xl max-w-[70%] bg-process_cyan-500 flex flex-col gap-y-2">
+              {{ message.content }}
+              <span class="self-end text-sm text-white/80">{{ message.timestamp }}</span>
+            </p>
+          {% elif message.sender.username == 'promotor' %}
+            <p class="self-start px-4 py-2 rounded-xl max-w-[70%] bg-steel_pink-500 flex flex-col gap-y-2">
+              {{ message.content }}
+              <span class="self-end text-sm text-white/80">{{ message.timestamp }}</span>
+            </p>
+          {% else %}
+            <p class="self-start px-4 py-2 rounded-xl max-w-[70%] bg-turquoise-500 flex flex-col gap-y-2">
+              {{ message.content }}
+              <span class="self-end text-sm text-gray-600">{{ message.timestamp }}</span>
+            </p>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        <p class="w-full text-xl text-center text-gray-500">No hay mensajes</p>
+      {% endif %}
+    </div>
+
+    <div id="chat" class="p-2 bg-gray-100">
+      <div class="flex">
+        <input type="text" id="inputMessage" class="flex-1 border-none rounded-l-full bg-neutral-200 focus:ring-0 focus:bg-neutral-300 active:ring-0" placeholder="Escribe un mensaje..." required />
+        <button class="flex items-center justify-center px-4 py-2 transition bg-green-400 rounded-r-full gap-x-2 hover:bg-green-600 hover:text-white" type="submit" id="btnMessage">
+          <span class="material-icons">send</span>
+          Enviar
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    var user = '{{ request.user }}'
+    var chat_id = '{{ chat.id }}'
+  </script>
+
+  <script src="{% static '/js/chat.js' %}"></script>
+{% endblock %}

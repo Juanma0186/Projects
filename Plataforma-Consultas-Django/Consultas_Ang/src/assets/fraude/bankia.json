@@ -1,0 +1,35 @@
+[
+    {
+        "usuario": "juanma",
+        "promotor": "Juguetes",
+        "entidad": "Bankia",
+        "mes": "Enero",
+        "fecha": "2024-02-22T02:09:12.644734Z",
+        "cantidad": 200
+    },
+    {
+        "usuario": "juanma",
+        "promotor": "Juguetes",
+        "entidad": "Bankia",
+        "mes": "Febrero",
+        "fecha": "2024-02-22T02:09:12.644734Z",
+        "cantidad": 350
+    },
+    {
+        "usuario": "juanma",
+        "promotor": "Juguetes",
+        "entidad": "Bankia",
+        "mes": "Marzo",
+        "fecha": "2024-02-22T02:09:12.644734Z",
+        "cantidad": 150
+    },
+    {
+        "usuario": "carlos",
+        "promotor": "Palomitas",
+        "entidad": "Bankia",
+        "mes": "Enero",
+        "fecha": "2024-02-22T02:09:12.644734Z",
+        "cantidad": 401
+    }
+
+]

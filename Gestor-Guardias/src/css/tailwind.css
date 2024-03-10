@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: Quicksand;
+  src: url('../fonts/Quicksand-VariableFont_wght.ttf');
+}
+
+.bg-\[\#6494AA\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(100 148 170 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#E9B872\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(233 184 114 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#8B85C1\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(139 133 193 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#90A959\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(144 169 89 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#A63D40\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(166 61 64 / var(--tw-bg-opacity));
+}
+
+tool-tip {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  user-select: none;
+  pointer-events: none;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+:has(> tool-tip) {
+  position: relative;
+}
+
+:has(> tool-tip):hover tool-tip {
+  opacity: 1;
+}

@@ -1,0 +1,127 @@
+<main class="min-h-[calc(100vh_-_75px)] bg-[#f2f6fc] dark:dark:bg-neutral-700">
+  @if (currentBankData && currentBankData.length > 0) {
+  <h2 class="py-6 pl-6 text-4xl font-semibold dark:text-white ">
+
+    @if (isAdmin) {
+    Información de <span class="italic font-bold">{{ currentBankData[0].last_name }},
+      {{ currentBankData[0].usuario | titlecase }}</span>!
+    }@else{
+    Bienvenido/a <span class="italic font-bold">{{ currentBankData[0].last_name }},
+      {{ currentBankData[0].usuario | titlecase }}</span>!
+    }
+
+
+
+  </h2>
+
+  <!--Info Cards-->
+  <section class="flex flex-wrap items-start justify-start gap-6 p-6">
+
+    <!--Card Entidad-->
+    <article class="overflow-hidden rounded-lg shadow-xl animate-fade-left bg-neutral-100 dark:bg-neutral-600">
+      <h3 class="flex items-center justify-start w-full p-4 font-semibold gap-x-2 bg-process_cyan-500">
+        <span class="material-icons">
+          account_balance
+        </span>
+        Entidad financiera
+      </h3>
+      <div class="flex items-center justify-center p-6 gap-x-2">
+        <img class="rounded-full size-14" src="assets/bancos/{{currentBankData[0].entidad | lowercase }}.webp"
+          alt="Logo del banco del {{currentBankData[0].entidad | uppercase}}">
+        <p class="text-xl font-semibold dark:text-white">{{currentBankData[0].entidad | uppercase}}</p>
+      </div>
+    </article>
+
+    <!--Card Total-->
+    <article
+      class="overflow-hidden rounded-lg shadow-xl animate-fade-left animate-delay-200 bg-neutral-100 dark:bg-neutral-600">
+      <h3 class="flex items-center justify-start w-full p-4 font-semibold gap-x-2 bg-turquoise-500">
+        <span class="-translate-y-[1.5px] material-icons">
+          euro_symbol
+        </span>
+        Saldo de la cuenta
+      </h3>
+      <div class="flex flex-col items-start justify-center p-6 gap-x-2">
+        <p class="text-xl font-semibold dark:text-white">Total actual: <span
+            class="text-turquoise-500">{{total | currency:'EUR'}}</span></p>
+      </div>
+    </article>
+
+    <!--Card Mes-->
+    <article
+      class="overflow-hidden rounded-lg shadow-xl animate-delay-300 animate-fade-left bg-neutral-100 dark:bg-neutral-600">
+      <h3 class="flex items-start justify-start w-full p-4 font-semibold gap-x-2 bg-steel_pink-500">
+        <span class="-translate-y-[1.5px] material-icons">
+          event_available
+        </span>
+        Última aportación recibida
+      </h3>
+      <div class="flex flex-col items-start justify-center p-6 gap-x-2">
+        <p class="text-xl font-semibold dark:text-white">Recibida en <span
+            class="text-steel_pink-500">{{ultimoMes}}</span></p>
+        <p class="text-xl font-semibold dark:text-white">Cantidad: <span
+            class="text-steel_pink-500">{{cantidad | currency:'EUR'}}</span></p>
+      </div>
+    </article>
+
+  </section>
+
+  <!--Table-->
+  <section class="flex items-start justify-start gap-6 p-6">
+    <div
+      class="overflow-hidden rounded-lg shadow-xl animate-fade-left animate-delay-500 bg-neutral-100 dark:bg-neutral-600">
+      <h3 class="flex items-center justify-start w-full p-4 font-semibold gap-x-2 bg-bright_pink_(crayola)-500">
+        <span class="-translate-y-[1.5px] material-icons">
+          history
+        </span>
+        Historial de aportaciones
+      </h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-center">
+          <thead>
+            <tr>
+              <th class="px-6 py-3 font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white/70">
+                Entidad
+                financiera</th>
+              <th class="px-6 py-3 font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white/70">
+                Mes
+              </th>
+              <th class="px-6 py-3 font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white/70">
+                Aportación</th>
+              <th class="px-6 py-3 font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white/70">
+                Total</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y-2 dark:divide-neutral-600 bg-neutral-300 dark:bg-neutral-500">
+            @for (data of currentBankData; track $index) {
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-lg text-gray-900 dark:text-white">{{data.entidad | titlecase}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-lg text-gray-900 dark:text-white">{{data.mes}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-lg text-gray-900 dark:text-white">{{data.cantidad | currency:'EUR' }}
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-lg text-gray-900 dark:text-white">{{totalAportaciones[$index]  | currency:'EUR'}}</div>
+              </td>
+              }
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <app-reclamaciones></app-reclamaciones>
+  </section>
+  @if (isAdmin) {
+  <button
+    class="fixed z-50 flex items-center justify-center px-4 py-2 text-white transition rounded-full shadow-md bottom-32 animate-fade-up animate-delay-500 right-4 size-12 material-icons bg-process_cyan-500 hover:bg-process_cyan-400"
+    (click)="goBack()">
+    arrow_back
+  </button>
+  }
+  }
+  <app-chat></app-chat>
+</main>

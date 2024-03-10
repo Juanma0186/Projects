@@ -1,0 +1,42 @@
+[
+    {
+        "id": "14ab81d7-e1be-463c-8628-4d699699eb36",
+        "profesor": "fernando",
+        "dia": "viernes",
+        "hora": "19:00",
+        "lugar": "salon 8",
+        "descripcion": "Viernes, 19:00, salon 8"
+    },
+    {
+        "id": "b3ab94f8-07e5-4582-93f8-cac3b4b39349",
+        "profesor": "fernando",
+        "dia": "miercoles",
+        "hora": "21:00",
+        "lugar": "salon 4",
+        "descripcion": "Miercoles, 17:00, salon 4"
+    },
+    {
+        "id": "7625cd0b-e96d-4a94-8dae-06c9ccefd147",
+        "profesor": "fernando",
+        "dia": "martes",
+        "hora": "18:00",
+        "lugar": "DISCOTECA",
+        "descripcion": "El fiera"
+    },
+    {
+        "id": "fe52a18a-67a8-4b8e-a69d-46005f24ae0f",
+        "profesor": "fernando",
+        "dia": "lunes",
+        "hora": "21:00",
+        "lugar": "salon 2",
+        "descripcion": ""
+    },
+    {
+        "id": "9b02f97c-b292-4347-997b-7a4deba4ee4e",
+        "profesor": "fernando",
+        "dia": "jueves",
+        "hora": "17:00",
+        "lugar": "Prueba",
+        "descripcion": "Prueba 2"
+    }
+]

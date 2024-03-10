@@ -1,0 +1,647 @@
+//! Importamos las fuentes
+@import url("https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap");
+
+//! Importamos los iconos de Bootstrap y Font Awesome
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+//! Fuentes
+$font-titulo: "Just Another Hand", sans-serif;
+@font-face {
+  font-family: "Study-Alone";
+  src: url("../fonts/StudyAlone.woff2");
+  font-display: swap;
+}
+$font-parrafo: "Study-Alone", sans-serif;
+
+//! Paleta de Colores
+// Azules
+$azul: #7073f6;
+$azul-mid: mix($azul, #000, 85%);
+$azul-dark: mix($azul, #000, 70%);
+// Amarillos
+$amarillo: #f8cf56;
+$amarillo-mid: mix($amarillo, #000, 85%);
+$amarillo-dark: mix($amarillo, #000, 70%);
+// Verdes
+$verde: #31de94;
+$verde-mid: mix($verde, #000, 85%);
+$verde-dark: mix($verde, #000, 70%);
+// Rojos
+$rojo: #de3131;
+$rojo-mid: mix($rojo, #000, 85%);
+$rojo-dark: mix($rojo, #000, 70%);
+// Rosas
+$rosa: #ec6fa3;
+$rosa-mid: mix($rosa, #000, 85%);
+$rosa-dark: mix($rosa, #000, 70%);
+// Blancos
+$blanco: #fff;
+$blanco-mid: mix($blanco, #000, 85%);
+$blanco-dark: mix($blanco, #000, 70%);
+
+// Array de colores tarjetas
+$colores: $amarillo, $rosa, $verde;
+$colores-mid: $amarillo-mid, $rosa-mid, $verde-mid;
+$colores-dark: $amarillo-dark, $rosa-dark, $verde-dark;
+// Propiedades gradiente
+$gradient: $azul 21px, $azul-mid 22px, $azul-mid 24px, transparent 24px,
+  transparent 67px, $azul-mid 67px, $azul-mid 69px, transparent 69px;
+
+//! MIXINS
+
+// Centrar items
+@mixin centrar($justify, $align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// Propiedades comunes títulos
+@mixin titulo() {
+  font-family: $font-titulo;
+  color: $blanco;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+// Transición
+@mixin transicion($timing: ease) {
+  transition: all 0.3s $timing;
+}
+
+// Shadow
+@mixin sombra() {
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+}
+
+// Borde
+@mixin borde($color: inherit, $radius: 8px, $type: solid) {
+  border: 3px $type $color;
+  border-radius: $radius;
+}
+
+// Separador
+@mixin separador($color: $blanco-mid) {
+  width: 100%;
+  height: 5px;
+  background-color: $color;
+  border: none;
+}
+
+//! Estilos globales
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+//! Estilos scrollbar
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: $azul-mid;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $azul-dark;
+}
+
+// Body
+body {
+  user-select: none;
+  scrollbar-gutter: stable;
+  padding-top: 2em;
+  min-height: 100dvh;
+  font-family: $font-parrafo;
+  text-wrap: pretty;
+  background: linear-gradient(135deg, $gradient),
+    linear-gradient(225deg, $gradient) 0 64px;
+  background-color: $azul;
+  background-size: 64px 128px;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+// Título
+#titulo {
+  width: fit-content;
+  margin: 0 auto;
+  padding: 0.5em 1em 0.25em;
+  border: 3px solid $azul-mid;
+  border-radius: 16px;
+  @include borde($azul-mid, 16px);
+  background: $azul;
+  @include transicion();
+  @include sombra();
+
+  h1 {
+    font-family: $font-titulo;
+    font-size: 3rem;
+    color: $blanco;
+    font-weight: bold;
+    @media screen and (max-width: 768px) {
+      font-size: 2.5rem;
+    }
+  }
+  span {
+    position: relative;
+    overflow: hidden;
+    @include transicion();
+  }
+  span::before {
+    content: "";
+    position: absolute;
+    top: 45%;
+    left: 0;
+    right: 100%;
+    height: 3px;
+    background-color: $amarillo;
+    transition: right 0.3s ease;
+  }
+  &:hover {
+    i {
+      cursor: pointer;
+      color: $verde;
+      @include transicion();
+    }
+    span {
+      color: $verde;
+    }
+    span::before {
+      right: 0;
+    }
+  }
+}
+
+// Crear Tarea
+@keyframes appear {
+  from {
+    display: none;
+    opacity: 0;
+  }
+  to {
+    display: flex;
+    opacity: 1;
+  }
+}
+
+#crearTarea-container,
+#editarTarea-container,
+#atajos-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: #00000088;
+  width: 100%;
+  height: 100dvh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  &.appear {
+    animation: appear 0.3s ease forwards;
+  }
+
+  &.disappear {
+    animation: appear 0.3s ease reverse forwards;
+  }
+
+  #crearTarea,
+  #editarTarea,
+  #atajos {
+    @include borde($amarillo-dark, 16px);
+    border-width: 5px;
+    background-color: $amarillo;
+    width: 450px;
+    height: 450px;
+    @include centrar(center, center);
+    flex-flow: wrap column;
+
+    h3 {
+      @include titulo();
+      text-align: center;
+      padding: 0.5em 0 0.25em;
+      font-size: 2rem;
+      color: #000;
+    }
+
+    form {
+      width: 100%;
+      flex: auto;
+      @include centrar(center, center);
+      flex-flow: nowrap column;
+
+      .estado-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 1em 0;
+
+        input[type="radio"] {
+          display: none;
+
+          @for $i from 1 through length($colores) {
+            &:nth-child(#{$i*2-1}):checked + label {
+              @include borde(nth($colores-dark, $i), 16px);
+              background-color: nth($colores-mid, $i);
+            }
+          }
+        }
+
+        label {
+          position: relative;
+          padding: 0.5em;
+          font-size: 1.25rem;
+          font-weight: 900;
+
+          @for $i from 1 through length($colores) {
+            &:nth-child(#{$i*2}) {
+              @include borde(nth($colores-mid, $i), 16px);
+            }
+
+            &:nth-child(#{$i*2}):hover {
+              @include borde(nth($colores-dark, $i), 16px);
+              background-color: nth($colores-mid, $i);
+            }
+          }
+        }
+      }
+
+      .textoNota {
+        flex: auto;
+        width: 100%;
+        padding: 1em;
+
+        textarea {
+          width: 100%;
+          height: 100%;
+          resize: none;
+          border: none;
+          outline: none;
+          font-size: 2rem;
+          font-weight: 900;
+          font-family: $font-parrafo;
+          color: $amarillo-dark;
+          background-color: transparent;
+          @include transicion();
+
+          &:focus {
+            color: #000;
+          }
+        }
+      }
+
+      div {
+        width: 100%;
+        @include centrar(center, center);
+        padding: 0em 0 1em;
+
+        button {
+          position: relative;
+          overflow: hidden;
+          cursor: pointer;
+          font-family: $font-parrafo;
+          padding: 0.5em 1em;
+          font-size: 1.5rem;
+          font-weight: 900;
+          color: $amarillo-dark;
+          background-color: transparent;
+          border: none;
+          @include transicion();
+
+          &::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 100%;
+            height: 3px;
+            background-color: $amarillo-dark;
+            transition: right 0.3s ease;
+          }
+
+          &:hover {
+            color: #000;
+          }
+
+          &:hover::before {
+            right: 0;
+          }
+        }
+      }
+    }
+
+    & > .teclas {
+      flex: auto;
+      font-size: 1.5rem;
+      font-weight: 900;
+      width: 100%;
+      padding: 1em;
+      @include centrar(center, start);
+      flex-flow: nowrap column;
+      gap: 1em;
+    }
+  }
+}
+
+// Botón limpiar tareas
+#limpiar,
+#atajosBoton,
+#pdfGen {
+  @include centrar(center, center);
+  cursor: pointer;
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  width: 64px;
+  height: 64px;
+  background: $blanco;
+  @include borde($blanco-dark, 50%);
+  @include sombra();
+  @include transicion();
+
+  &:hover {
+    background: $rojo-mid;
+    border-color: $rojo-dark;
+  }
+
+  span {
+    transform: translate(0px, 1px);
+    color: $rojo-mid;
+    font-size: 2.25rem;
+    @include transicion(linear);
+  }
+
+  &:hover span {
+    font-size: 2.5rem;
+    color: $blanco;
+  }
+}
+#atajosBoton {
+  bottom: 13em;
+
+  &:hover {
+    background: $amarillo;
+    border-color: $amarillo-mid;
+  }
+
+  span {
+    color: $amarillo;
+  }
+
+  &:hover span {
+    color: $blanco;
+  }
+}
+
+#pdfGen {
+  bottom: 7em;
+
+  &:hover {
+    background: $verde;
+    border-color: $verde-mid;
+  }
+
+  span {
+    color: $verde;
+  }
+
+  &:hover span {
+    color: $blanco;
+  }
+}
+
+//! Tablero
+.tablero {
+  @include centrar(center, space-between);
+  flex-flow: wrap row;
+  gap: 1em;
+  width: 90%;
+  min-height: 80vh;
+  height: fit-content;
+  margin: 2em auto;
+  padding: 1em;
+}
+
+// Contenedor de tareas
+.tarjeta {
+  @include centrar(start, center);
+  flex-flow: wrap column;
+  flex: 1 1 400px;
+  min-height: 80dvh;
+  height: fit-content;
+  overflow: hidden;
+  // Cambiamos el borde solo de la tarjeta
+  @include transicion();
+
+  @for $i from 1 through length($colores) {
+    &:nth-child(#{$i}) {
+      background: nth($colores, $i);
+      @include borde(nth($colores-dark, $i), 16px);
+      border-width: 5px;
+
+      &.hover {
+        border-style: dashed;
+      }
+
+      & ::-webkit-scrollbar-thumb {
+        background: nth($list: $colores, $n: $i);
+      }
+
+      h2 {
+        background-color: nth($colores-mid, $i);
+      }
+
+      & > * > .tarea {
+        @include borde(nth($colores-mid, $i), 16px);
+
+        &:hover {
+          @include borde(nth($colores-dark, $i), 16px);
+        }
+      }
+
+      // Añadimos el simbolo correspondiente segun la tarjeta en la que se encunetre en la tarea
+      @if $i == 1 {
+        p:not(.no-pin)::before {
+          content: "❗";
+          margin-right: 0.5em;
+        }
+      } @else if $i == 2 {
+        p::before {
+          content: "✏️";
+          margin-right: 0.5em;
+        }
+      } @else if $i == 3 {
+        p::before {
+          content: "✔️";
+          display: inline-block;
+          margin-right: 0.5em;
+        }
+        p {
+          position: relative;
+          color: nth($list: $colores-dark, $n: $i);
+          text-decoration: line-through #0000004b 2px;
+        }
+      }
+
+      .opciones {
+        color: nth($colores-dark, $i);
+      }
+
+      hr {
+        @include separador(nth($colores-dark, $i));
+      }
+    }
+  }
+
+  h2 {
+    width: 100%;
+    @include titulo();
+    text-align: center;
+    padding: 0.5em 0 0.25em;
+    font-size: 3rem;
+    color: #000;
+    @include transicion();
+  }
+}
+
+// Contenedor de tareas vacío
+
+.tarea-container {
+  width: 100%;
+  overflow: hidden;
+  max-height: calc(80vh - 97px - 1em);
+  scrollbar-gutter: stable;
+  overflow-y: hidden;
+  flex: auto;
+  padding: 1em;
+  @include transicion();
+
+  &:hover {
+    overflow-y: auto;
+  }
+
+  .tarea {
+    @include centrar(center, center);
+    flex-flow: nowrap row;
+    width: 100%;
+    margin-bottom: 1em;
+    padding: 0.5em;
+    @include transicion();
+
+    &:not(.anadir) {
+      cursor: move;
+    }
+
+    &:hover {
+      .contenido > .opciones {
+        display: flex;
+      }
+    }
+
+    .contenido {
+      width: 100%;
+      font-size: 1.4rem;
+      text-wrap: pretty;
+      hyphens: auto;
+      overflow: hidden;
+
+      .opciones {
+        margin-top: 0.35em;
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        flex-flow: nowrap row;
+        gap: 1.5em;
+        font-size: 1rem;
+        font-weight: 900;
+        @include transicion();
+
+        .botones {
+          span {
+            font-size: 1.75rem;
+            cursor: pointer;
+            @include transicion();
+
+            &:hover:first-child {
+              color: $azul;
+            }
+
+            &:hover:last-child {
+              color: $rojo;
+            }
+          }
+        }
+      }
+    }
+
+    &.anadir {
+      cursor: pointer;
+      font-size: 1.3rem;
+      font-weight: 900;
+
+      & > img {
+        width: 20px;
+        height: auto;
+        margin-right: 0.25em;
+        @include transicion();
+      }
+
+      &:hover img {
+        transform: rotate(90deg);
+      }
+    }
+  }
+}
+
+.notyf__toast {
+  border-radius: 8px;
+}
+
+kbd {
+  white-space: nowrap;
+  font-family: $font-parrafo;
+  color: $blanco;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  background: linear-gradient(#777, #555);
+  border-radius: 3px;
+  height: 28px;
+  margin: 0 2px;
+  padding: 3px 8px;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 900;
+  display: inline-block;
+  position: relative;
+  top: -2px;
+  box-shadow: inset 0 -2px #0004, 0 2px #333;
+
+  &:hover {
+    background: linear-gradient(#888, #666);
+  }
+
+  &:active {
+    translate: 0 2px;
+    box-shadow: inset 0 -2px #0004, 0 0 #333;
+  }
+}
+
+.rojo {
+  color: $rojo;
+}

@@ -1,0 +1,41 @@
+<button
+  class="fixed z-50 transition duration-300 ease-in-out bg-white rounded-full shadow-xl animate-fade-up size-12 dark:text-white/80 bottom-[72px] dark:bg-neutral-800 right-4 material-icons dark:hover:bg-neutral-700 hover:bg-neutral-200 hover:text-black/80 dark:hover:text-white/80 "
+  (click)="toggleChat()">
+  <span class="material-icons" id="chatIcon">
+    chat
+  </span>
+</button>
+
+<div
+  class="fixed flex-col hidden min-w-[150px] max-w-[350px] overflow-hidden bg-white rounded-lg shadow-2xl dark:bg-neutral-600 bottom-4 right-20 h-[450px] "
+  id="chat">
+  <h3 class="flex items-center justify-center w-full p-4 font-semibold gap-x-2 bg-process_cyan-500">
+    <span class="material-icons">
+      help_outline
+    </span>
+    Chat de ayuda
+  </h3>
+  <div class="flex-1 p-4 space-y-4 message-list">
+    <!-- Iteramos sobre cada mensaje en el array de mensajes -->
+    <div class="flex flex-col items-start justify-start overflow-y-auto gap-y-2 max-h-[250px] p-2">
+      @for (message of messages; track $index) {
+      @if (message.user == 'admin') {
+      <p class="self-start px-4 py-2 rounded-xl max-w-[70%] bg-process_cyan-500">
+        {{message.content}}
+      </p>
+      }
+      @else {
+      <p class="self-end px-4 py-2 rounded-xl max-w-[70%] bg-turquoise-500">
+        {{message.content}}
+      </p>
+      }
+      }
+    </div>
+  </div>
+  <form [formGroup]="chatForm" (ngSubmit)="sendMessage()" class="p-4 border-t border-gray-200">
+    <input formControlName="message" placeholder="Escribe un mensaje..."
+      class="w-full p-2 border rounded-lg dark:bg-neutral-500 focus:outline-none focus:shadow-outline dark:border-transparent dark:text-white">
+    <button type="submit"
+      class="w-full p-2 mt-2 text-white rounded-lg bg-process_cyan-500 hover:bg-process_cyan-400">Enviar</button>
+  </form>
+</div>

@@ -1,0 +1,42 @@
+[
+    {
+        "id": "54f2d259-d795-4b36-b94a-fd54e7418c5f",
+        "profesor": "diana",
+        "dia": "martes",
+        "hora": "16:00",
+        "lugar": "salon 1",
+        "descripcion": "Clase de Diana los martes a las 17:00 en el salon 1"
+    },
+    {
+        "id": "54f2d259-d795-4b36-b94a-fd54e7418c6f",
+        "profesor": "diana",
+        "dia": "miercoles",
+        "hora": "18:00",
+        "lugar": "salon 2",
+        "descripcion": "Clase de Diana los miercoles a las 18:00 en el salon 2"
+    },
+    {
+        "id": "54f2d259-d795-4b36-b94a-fd54e7418c7f",
+        "profesor": "diana",
+        "dia": "jueves",
+        "hora": "21:00",
+        "lugar": "salon 3",
+        "descripcion": "Prueba 1"
+    },
+    {
+        "id": "80edebec-8a64-45f7-9737-17dc26218502",
+        "profesor": "diana",
+        "dia": "lunes",
+        "hora": "19:00",
+        "lugar": "salon 8",
+        "descripcion": "Descripción de la guardia"
+    },
+    {
+        "id": "2e0dfb0e-f346-4e1f-ab47-2ede511a4416",
+        "profesor": "diana",
+        "dia": "viernes",
+        "hora": "20:00",
+        "lugar": "Biblioteca",
+        "descripcion": "Prueba 2"
+    }
+]

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/style.css">
+  <title>Guardias</title>
+</head>
+
+<body class="flex items-center justify-center w-full min-h-screen font-quicksand bg-neutral-800">
+  <nav class="fixed top-0 z-20 w-full text-center">
+    <h1 class="p-4 text-3xl font-bold text-white uppercase bg-air_force_blue-500">Gestor de Guardias</h1>
+  </nav>
+  <main>
+    <button
+      class="fixed z-10 flex items-center justify-center p-2 transition-all duration-300 border-2 rounded-full bottom-4 bg-neutral-700 text-white/80 size-12 botom-4 left-4 hover:text-red-500 border-white/80 hover:border-red-500"
+      id="btnCerrarSesion" title="Cerrar sesión">
+      <span class="material-icons">
+        logout
+      </span>
+    </button>
+    <!-- Calendario-->
+    <div>
+      <h1 class="p-4 text-2xl font-bold text-center text-white bg-air_force_blue-500 rounded-t-3xl">
+        Guardias de
+        <span class="italic font-bold" id="username">
+
+        </span>
+      </h1>
+      <table class="w-[800px] h-[600px] rounded-b-3xl shadow-2xl bg-neutral-700">
+        <thead class="rounded-xl">
+          <tr class="text-xl">
+            <th class="w-[100px] h-[50px] text-center border-t-2 border-white/40 bg-white text-pacific_cyan-500">Horas
+            </th>
+            <th class="w-[100px] h-[50px] border-r-2 border-b-2 border-t-2 border-white/40 text-center text-white">Lunes
+            </th>
+            <th class="w-[100px] h-[50px] border-r-2 border-b-2 border-t-2 border-white/40 text-center text-white">
+              Martes</th>
+            <th class="w-[100px] h-[50px] border-r-2 border-b-2 border-t-2 border-white/40 text-center text-white">
+              Miércoles</th>
+            <th class="w-[100px] h-[50px] border-r-2 border-b-2 border-t-2 border-white/40 text-center text-white">
+              Jueves</th>
+            <th class="w-[100px] h-[50px] border-t-2 border-b-2 border-white/40 text-center text-white">
+              Viernes
+            </th>
+          </tr>
+        </thead>
+        <tr data-hora="16:00" class="border-b-2 border-white/40">
+          <td
+            class="bg-pacific_cyan-500 w-[100px] h-[50px] text-center text-white border-b-2 text-xl font-bold border-r-2 border-white/40">
+            16:00</td>
+          <td data-dia="lunes" class="w-[100px] h-[50px] text-center border-r-2 border-white/40 "></td>
+          <td data-dia="martes" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="miercoles" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="jueves" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="viernes" class="w-[100px] h-[50px] text-center"></td>
+        </tr>
+        <tr data-hora="17:00" class="border-b-2 border-white/40">
+          <td
+            class="bg-pacific_cyan-500 w-[100px] text-xl font-bold h-[50px] text-center text-white border-b-2 border-r-2 border-white/40">
+            17:00</td>
+          <td data-dia="lunes" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="martes" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="miercoles" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="jueves" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="viernes" class="w-[100px] h-[50px] text-center"></td>
+        </tr>
+        <tr data-hora="18:00" class="border-b-2 border-white/40">
+          <td
+            class="bg-pacific_cyan-500 w-[100px] h-[50px] text-center text-white border-b-2 text-xl font-bold border-r-2 border-white/40">
+            18:00</td>
+          <td data-dia="lunes" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="martes" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="miercoles" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="jueves" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="viernes" class="w-[100px] h-[50px] text-center"></td>
+        </tr>
+        <tr data-hora="19:00" class="border-b-2 border-white/40">
+          <td
+            class="bg-pacific_cyan-500 w-[100px] h-[50px] text-center text-white border-b-2 text-xl font-bold border-r-2 border-white/40">
+            19:00</td>
+          <td data-dia="lunes" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="martes" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="miercoles" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="jueves" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="viernes" class="w-[100px] h-[50px] text-center"></td>
+        </tr>
+        <tr data-hora="20:00" class="border-b-2 border-white/40">
+          <td
+            class="bg-pacific_cyan-500 w-[100px] h-[50px] text-center text-white border-b-2 text-xl font-bold border-r-2 border-white/40">
+            20:00</td>
+          <td data-dia="lunes" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="martes" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="miercoles" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="jueves" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="viernes" class="w-[100px] h-[50px] text-center"></td>
+        </tr>
+        <tr data-hora="21:00" class="rounded-b-3xl">
+          <td
+            class="bg-pacific_cyan-500 w-[100px] h-[50px] text-center text-xl font-bold text-white border-r-2 border-white/40 rounded-bl-3xl">
+            21:00</td>
+          <td data-dia="lunes" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="martes" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="miercoles" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="jueves" class="w-[100px] h-[50px] text-center border-r-2 border-white/40"></td>
+          <td data-dia="viernes" class="w-[100px] h-[50px] text-center rounded-br-3xl"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+
+</body>
+
+<script type="module" src="../scripts/main.js"></script>
+<script type="module" src="../scripts/getGuardiasProfe.js"></script>
+<script>
+  const nombre = globalThis.localStorage.getItem('name');
+  document.title = "Gestor de Guardias | " + nombre.charAt(0).toUpperCase() + nombre.slice(1);
+</script>
+
+</html>

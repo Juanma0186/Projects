@@ -1,0 +1,42 @@
+[
+    {
+        "id": "b3ab94f8-07e5-4582-95f8-cac3b4b39349",
+        "profesor": "jorge",
+        "dia": "martes",
+        "hora": "21:00",
+        "lugar": "salon 2",
+        "descripcion": "Martes, 18:00, salon 2"
+    },
+    {
+        "id": "b3ab94f8-07e5-4582-96f8-cac3b4b39349",
+        "profesor": "jorge",
+        "dia": "viernes",
+        "hora": "17:00",
+        "lugar": "biblioteca",
+        "descripcion": "Viernes, 16:00, biblioteca"
+    },
+    {
+        "id": "b3ab94f8-07e5-4582-98f8-cac3b4b39349",
+        "profesor": "jorge",
+        "dia": "jueves",
+        "hora": "18:00",
+        "lugar": "salon 1",
+        "descripcion": "Jueves, 17:00, salon 1"
+    },
+    {
+        "id": "b3ab94f8-07e5-4582-99f8-cac3b4b39349",
+        "profesor": "jorge",
+        "dia": "miercoles",
+        "hora": "19:00",
+        "lugar": "salon 3",
+        "descripcion": "Miercoles, 19:00, salon 3"
+    },
+    {
+        "id": "00319e05-d66d-4126-9ae8-7d4fbffe9eab",
+        "profesor": "jorge",
+        "dia": "lunes",
+        "hora": "16:00",
+        "lugar": "Prueba",
+        "descripcion": "Lunes, 16:00, Prueba"
+    }
+]

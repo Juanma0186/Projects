@@ -1,0 +1,113 @@
+<main class="p-4">
+  <section class="flex items-center justify-between mt-6 animate-fade-down">
+    <h2 class="h-full text-2xl font-semibold text-turquoise-500">
+      Listado de Bancos
+    </h2>
+
+    <form class="flex max-w-[350px]">
+      <input
+        class="flex-1 p-2 border-2 border-r-0 rounded-l-md focus:outline-none dark:bg-neutral-600 dark:text-white dark:placeholder:text-white/70 "
+        type="text" placeholder="Introduce un banco" #filter (keyup)="filterResults(filter.value)" />
+      <div
+        class="flex items-center justify-center px-4 font-medium border-2 select-none gap-x-2 text-turquoise-500 rounded-r-md"
+        type="button">
+        <span class="material-icons ">
+          search
+        </span>
+      </div>
+    </form>
+  </section>
+  <section class="mt-6 divide-y-2 dark:divide-white/70 divide-neutral-200 animate-fade-down animate-delay-[400ms]">
+    @if (bancosFiltrados.length > 0) {
+    @for (banco of bancosFiltrados; track $index) {
+    <details name="banco"
+      class="first:rounded-t-xl last:rounded-b-xl bg-white dark:bg-neutral-600 [&>*>svg]:open:-rotate-180 transition-all duration-300">
+      <summary class="flex items-center justify-between px-4 py-2 cursor-pointer">
+        <span class="flex items-center justify-center text-xl font-semibold gap-x-3 dark:text-white/90">
+          <img class="bg-white border-2 border-white rounded-full size-10"
+            src="assets/bancos/{{banco.banco | lowercase}}.webp" alt="Logo del banco {{banco.banco}}">
+          {{banco.banco}}
+        </span>
+        <svg class="transition-all duration-300 transform rotate-0 text-turquoise-500" width="24" height="24"
+          fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          viewBox="0 0 24 24">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </summary>
+
+      <div
+        class="flex flex-col w-full p-6 overflow-hidden transition-all duration-300 border-t-2 bg-neutral-200 dark:bg-neutral-500 gap-y-2 border-turquoise-500">
+        <div class="flex items-center justify-between w-full">
+          <a [routerLink]="['/entidad', banco.banco.toLowerCase()]"
+            class="text-2xl dark:text-white hover:underline">{{banco.banco}}</a>
+        </div>
+        <h3 class="flex items-center w-full text-lg font-semibold text-turquoise-500 rounded-t-xl">
+          <span class="material-icons">
+            people
+          </span>
+          Historial de usuarios
+        </h3>
+        <div>
+          @for (usuario of banco.usuarios; track $index) {
+          <details name="usuario"
+            class="first:rounded-t-xl last:rounded-b-xl bg-white dark:bg-neutral-600 [&_svg]:open:-rotate-180 transition-all duration-300">
+            <summary class="flex justify-between px-4 py-2 cursor-pointer items -center">
+              <span class="text-xl dark:text-white/90">{{usuario.usuario | titlecase}}</span>
+              <svg class="transition duration-300 transform rotate-0 -all text-turquoise-500" width="24" height="24"
+                fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                viewBox="0 0 24 24">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <div
+              class="flex flex-col w-full p-6 overflow-hidden transition-all duration-300 border-t-2 bg-neutral-50 dark:bg-neutral-400 gap-y-2 border-turquoise-500">
+              <div class="flex justify-between w-full items -center">
+                <a [routerLink]="['/ciudadano', usuario.usuario]"
+                  class="text-2xl dark:text-white hover:underline">{{usuario.usuario | titlecase}}</a>
+                <a [routerLink]="['/promotor', usuario.aportaciones[0].promotor]"
+                  class="flex items-center text-xl gap-x-2 dark:text-white hover:underline">Promotor:
+                  {{usuario.aportaciones[0].promotor| titlecase}}
+                </a>
+
+
+              </div>
+              <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
+                <table class="min-w-full text-center divide-y divide-gray-200">
+                  <thead class="bg-gray-200 dark:bg-neutral-600">
+                    <tr>
+                      <th scope="col"
+                        class="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-white">
+                        Mes
+                      </th>
+                      <th scope="col"
+                        class="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-white">
+                        Aportaciones Mensuales
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-gray-200">
+                    @for (aportacion of usuario.aportaciones; track $index) {
+                    <tr>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900">{{aportacion.mes}}</div>
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900">{{aportacion.cantidad | currency:'EUR'}}</div>
+                      </td>
+                    </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </details>
+          }
+        </div>
+      </div>
+    </details>
+    }}
+    @else{
+    <p class="text-center dark:text-white/70">No se encontraron resultados</p>
+    }
+  </section>
+</main>

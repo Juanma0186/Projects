@@ -1,0 +1,17 @@
+### Todas las tareas
+
+GET http://localhost:8080/api/tareas
+
+### Tarea por id
+
+GET http://localhost:8080/api/tareas/1706531467903
+
+### Crear tarea
+
+POST http://localhost:8080/
+Content-Type: application/json
+
+{
+    "descripcion": "Descripcion de la tarea 1",
+    "estado": "doing"
+}

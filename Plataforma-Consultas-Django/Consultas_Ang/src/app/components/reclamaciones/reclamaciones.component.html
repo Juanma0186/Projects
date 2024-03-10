@@ -1,0 +1,90 @@
+<div
+  class="overflow-hidden rounded-lg shadow-xl animate-fade-left animate-delay-[700ms] bg-neutral-100 dark:bg-neutral-600">
+  <h3 class="flex items-center justify-start w-full p-4 font-semibold gap-x-2 bg-amber-500">
+    <span class="-translate-y-[1.5px] material-icons">
+      history_edu
+    </span>
+    Formulario de Reclamación
+  </h3>
+  <div class="overflow-x-auto">
+    <form class="flex flex-col gap-y-2 justify-center  max-w-[500px] items-center p-6 bg-white dark:bg-neutral-600 "
+      [formGroup]="reclamacionForm" (ngSubmit)="onSubmit()">
+      <div class="flex-1">
+        <label for="nombre"
+          class="block mb-2 text-sm font-bold text-neutral-700 dark:text-neutral-200/90">Nombre</label>
+        <input formControlName="nombre" type="text"
+          class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none dark:caret-inherit dark:border-transparent dark:text-white dark:bg-neutral-500 focus:outline-none focus:shadow-outline"
+          id="nombre" />
+        <div *ngIf="nombre?.invalid && nombre?.touched" class="text-red-600">
+          El nombre es requerido.
+        </div>
+
+        <label for="apellido"
+          class="block mb-2 text-sm font-bold text-neutral-700 dark:text-neutral-200/90">Apellido</label>
+        <input formControlName="apellido" type="text"
+          class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none dark:caret-inherit dark:border-transparent dark:text-white dark:bg-neutral-500 focus:outline-none focus:shadow-outline"
+          id="apellido" />
+        <div *ngIf="apellido?.invalid && apellido?.touched" class="text-red-600">
+          El apellido es requerido.
+        </div>
+
+        <label for="correo"
+          class="block mb-2 text-sm font-bold text-neutral-700 dark:text-neutral-200/90">Correo</label>
+        <input formControlName="correo" type="text"
+          class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none dark:caret-inherit dark:border-transparent dark:text-white dark:bg-neutral-500 focus:outline-none focus:shadow-outline"
+          id="correo" />
+        <div *ngIf="correo?.errors?.['required'] && correo?.touched" class="text-red-600">
+          El correo es requerido.
+        </div>
+        <div *ngIf="correo?.errors?.['email'] && correo?.touched" class="text-red-600">
+          Por favor, introduce un correo electrónico válido.
+        </div>
+
+        <label for="telefono"
+          class="block mb-2 text-sm font-bold text-neutral-700 dark:text-neutral-200/90">Teléfono</label>
+        <input formControlName="telefono" type="text"
+          class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none dark:caret-inherit dark:border-transparent dark:text-white dark:bg-neutral-500 focus:outline-none focus:shadow-outline"
+          id="telefono" />
+        <div *ngIf="telefono?.errors?.['required'] && telefono?.touched" class="text-red-600">
+          El número de teléfono es requerido.
+        </div>
+        <div *ngIf="telefono?.errors?.['minlength'] && telefono?.touched" class="text-red-600">
+          debe tener al menos 10 caracteres.
+        </div>
+
+        <label for="motivo"
+          class="block mb-2 text-sm font-bold text-neutral-700 dark:text-neutral-200/90">Motivo</label>
+        <select id="motivo"
+          class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow dark:caret-inherit dark:border-transparent dark:text-white dark:bg-neutral-500 focus:outline-none focus:shadow-outline"
+          formControlName="motivo">
+          <option *ngFor="let motivo of motivos" [value]="motivo">{{motivo}}</option>
+        </select>
+        <div *ngIf="motivo?.invalid && motivo?.touched" class="text-red-600">
+          El motivo es requerido.
+        </div>
+
+        <label for="motivo" class="block mb-2 text-sm font-bold text-neutral-700 dark:text-neutral-200/90">Descripción
+          de la reclamación </label>
+        <textarea
+          class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow resize-none dark:caret-inherit dark:border-transparent dark:text-white dark:bg-neutral-500 focus:outline-none focus:shadow-outline"
+          rows="5" formControlName="descripcion"></textarea>
+        <div *ngIf="descripcion?.errors?.['required'] && descripcion?.touched" class="text-red-600">
+          La descripción es requerida.
+        </div>
+        <div *ngIf="descripcion?.errors?.['minlength'] && descripcion?.touched" class="text-red-600">
+          debe tener al menos 10 caracteres.
+        </div>
+        <div *ngIf="descripcion?.errors?.['maxlength'] && descripcion?.touched" class="text-red-600">
+          no puede tener más de 20 caracteres.
+        </div>
+
+      </div>
+      <button
+        class="flex items-center px-4 py-2 mt-2 font-semibold transition rounded-lg shadow-lg bg-amber-500 hover:bg-amber-400 gap-x-2 w-fit"
+        type="submit">
+        <span class="material-icons">
+          send
+        </span>
+        Enviar reclamación
+      </button>
+    </form>

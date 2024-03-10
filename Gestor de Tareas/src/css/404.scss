@@ -1,0 +1,142 @@
+//! Importamos las fuentes
+@import url("https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap");
+
+//! Importamos los iconos de Bootstrap y Font Awesome
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+//! Fuentes
+$font-titulo: "Just Another Hand", sans-serif;
+@font-face {
+  font-family: "Study-Alone";
+  src: url("../fonts/StudyAlone.woff2");
+  font-display: swap;
+}
+$font-parrafo: "Study-Alone", sans-serif;
+
+//! Paleta de Colores
+// Blancos
+$blanco: #fff;
+$blanco-mid: lighten($blanco, 20%);
+$blanco-dark: #bebebe;
+// Azules
+$azul: #7073f6;
+$azul-mid: #4d51c0;
+$azul-dark: #2e31a0;
+//Rojos
+$rojo: #de3131;
+$rojo-mid: #c42b2b;
+$rojo-dark: #ae1f1f;
+
+// Propiedades gradiente
+$gradient: $azul 21px, $azul-mid 22px, $azul-mid 24px, transparent 24px,
+  transparent 67px, $azul-mid 67px, $azul-mid 69px, transparent 69px;
+
+//! MIXINS
+// Estilos del título
+@mixin titulo() {
+  font-family: $font-titulo;
+  font-size: 3rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+// Estilos del párrafo
+@mixin parrafo() {
+  font-family: $font-parrafo;
+  font-size: 3rem;
+  text-wrap: pretty;
+  text-align: center;
+}
+
+// Borde
+@mixin borde($color: inherit, $radius: 8px) {
+  border: 3px solid $color;
+  border-radius: $radius;
+}
+
+// Transición
+@mixin transicion($timing: ease) {
+  transition: all 0.3s $timing;
+}
+
+// Separador
+@mixin separador($color: $blanco-mid) {
+  width: 100%;
+  height: 5px;
+  background-color: $color;
+  border: none;
+}
+
+// Centrar items
+@mixin centrar() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  user-select: none;
+  scrollbar-gutter: stable;
+  min-height: 100dvh;
+  font-family: $font-parrafo;
+  background: linear-gradient(135deg, $gradient),
+    linear-gradient(225deg, $gradient) 0 64px;
+  background-color: $azul;
+  background-size: 64px 128px;
+  @include centrar();
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.tarjeta {
+  @include centrar();
+  flex-flow: wrap column;
+  min-height: 400px;
+  width: 400px;
+  height: fit-content;
+  overflow: hidden;
+  background: $rojo;
+  @include borde($rojo-dark, 16px);
+  border-width: 5px;
+
+  h1 {
+    @include titulo();
+    padding: 0.5em 0 0.25em;
+  }
+
+  hr {
+    @include separador($rojo-dark);
+  }
+
+  p {
+    padding: 1em;
+    @include parrafo();
+    flex: auto;
+  }
+
+  a {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0.5em 0em;
+    padding: 0.5em 1em;
+    background: $blanco-mid;
+    @include borde($blanco-dark);
+    @include transicion();
+
+    &:hover {
+      background: $blanco-dark;
+    }
+  }
+}

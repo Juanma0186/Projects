@@ -1,0 +1,50 @@
+{% extends "account/base_entrance.html" %}
+{% load static tailwind_tags %}
+
+{% load i18n %}
+{% load allauth account %}
+{% block head_title %}
+    {% trans "Sign In" %}
+{% endblock head_title %}
+{% block body %}
+    {% if messages %}
+        <div>
+            <strong>{% trans "Messages:" %}</strong>
+            <ul>
+                {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    {% block content %}
+        {% tailwind_css %} 
+
+        <main class="flex items-center justify-center min-h-screen">
+            <form method="post" action="{{ login_url }}" class="w-[500px] bg-white shadow-2xl rounded-lg max-w-xs overflow-auto">
+                <h2 class="w-full py-3 text-2xl font-bold text-center text-white bg-process_cyan-500">
+                    {% trans "Sign In" %}
+                </h2>
+                <div class="flex flex-col items-center justify-center p-4">
+                    {% csrf_token %}
+                    <div class="w-full mb-4">
+                        {% for field in form %}
+                            <label for="{{ field.html_name }}" class="block mb-2 text-sm font-bold text-gray-700">
+                                {{ field.label }}
+                            </label>
+                            <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" value="{{ field.value|default:'' }}" required="{% if field.field.required %}true{% else %}false{% endif %}" id="{{ field.html_name }}" />
+                        {% endfor %}
+                    </div>
+                    <div class="">
+                        <a href="{% url 'account_reset_password' %}" class="text-sm text-blue-500 hover:underline">
+                            {% trans "Forgot Password?" %}
+                        </a>
+                    </div>
+                    <button type="submit" class="px-4 py-2 font-semibold text-white transition bg-process_cyan-500 rounded-xl hover:bg-process_cyan-400">
+                        {% trans "Sign In" %}
+                    </button>
+                </div>
+            </form>
+        </main>
+    {% endblock content %}
+{% endblock body %}
+{% block extra_body %}
+{% endblock extra_body %}

@@ -1,0 +1,42 @@
+<main class="min-h-[calc(100vh_-_75px)] bg-[#f2f6fc] dark:dark:bg-neutral-700">
+  <nav class="fixed left-0 w-64 h-full p-4 overflow-auto bg-white shadow-lg dark:bg-neutral-800 dark:text-white ">
+    <a class="flex items-center justify-start px-4 py-2 mb-4 font-bold rounded gap-x-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 group"
+      routerLink="/admin/inicio"
+      [ngClass]="{'text-bright_pink_(crayola)-500 dark:text-bright_pink_(crayola)-500': option == 'inicio'}"
+      (click)="onOption('inicio')">
+      <span class="material-icons group-hover:text-bright_pink_(crayola)-500">
+        home
+      </span>
+      Inicio
+    </a>
+    <a class="flex items-center justify-start px-4 py-2 mb-4 font-bold rounded gap-x-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 group"
+      routerLink="/admin/ciudadanos"
+      [ngClass]="{'text-process_cyan-500 dark:text-process_cyan-500': option == 'ciudadanos'}"
+      (click)="onOption('ciudadanos')">
+
+      <span class="material-icons group-hover:text-process_cyan-500">
+        people
+      </span>
+      Ciudadanos
+    </a>
+    <a routerLink="/admin/promotores"
+      class="flex items-center justify-start px-4 py-2 mb-4 font-bold rounded gap-x-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 group"
+      [ngClass]="{'text-steel_pink-500 dark:text-steel_pink-500': option == 'promotores'}"
+      (click)="onOption('promotores')">
+      <span class="material-icons group-hover:text-steel_pink-500">
+        apartment
+      </span>
+      Promotores
+    </a>
+    <a class="flex items-center justify-start px-4 py-2 mb-4 font-bold rounded gap-x-3 hover:bg-neutral-200 dark:hover:bg-neutral-700 group"
+      routerLink="/admin/entidades" [ngClass]="{'text-turquoise-500 dark:text-turquoise-500': option == 'bancos'}"
+      (click)="onOption('bancos')">
+      <span class="material-icons group-hover:text-turquoise-500">
+        account_balance
+      </span>
+      Bancos</a>
+  </nav>
+  <div class="w-full pl-64">
+    <router-outlet></router-outlet>
+  </div>
+</main>

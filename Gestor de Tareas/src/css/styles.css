@@ -1,0 +1,818 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+@font-face {
+  font-family: "Study-Alone";
+  src: url("../fonts/StudyAlone.woff2");
+  font-display: swap;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: #5f62d1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4e51ac;
+}
+
+body {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  scrollbar-gutter: stable;
+  padding-top: 2em;
+  min-height: 100dvh;
+  font-family: "Study-Alone", sans-serif;
+  text-wrap: pretty;
+  background: linear-gradient(135deg, #7073f6 21px, #5f62d1 22px, #5f62d1 24px, transparent 24px, transparent 67px, #5f62d1 67px, #5f62d1 69px, transparent 69px), linear-gradient(225deg, #7073f6 21px, #5f62d1 22px, #5f62d1 24px, transparent 24px, transparent 67px, #5f62d1 67px, #5f62d1 69px, transparent 69px) 0 64px;
+  background-color: #7073f6;
+  background-size: 64px 128px;
+}
+body a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#titulo {
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 0.5em 1em 0.25em;
+  border: 3px solid #5f62d1;
+  border-radius: 16px;
+  border: 3px solid #5f62d1;
+  border-radius: 16px;
+  background: #7073f6;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+}
+#titulo h1 {
+  font-family: "Just Another Hand", sans-serif;
+  font-size: 3rem;
+  color: #fff;
+  font-weight: bold;
+}
+@media screen and (max-width: 768px) {
+  #titulo h1 {
+    font-size: 2.5rem;
+  }
+}
+#titulo span {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+#titulo span::before {
+  content: "";
+  position: absolute;
+  top: 45%;
+  left: 0;
+  right: 100%;
+  height: 3px;
+  background-color: #f8cf56;
+  transition: right 0.3s ease;
+}
+#titulo:hover i {
+  cursor: pointer;
+  color: #31de94;
+  transition: all 0.3s ease;
+}
+#titulo:hover span {
+  color: #31de94;
+}
+#titulo:hover span::before {
+  right: 0;
+}
+
+@keyframes appear {
+  from {
+    display: none;
+    opacity: 0;
+  }
+  to {
+    display: flex;
+    opacity: 1;
+  }
+}
+#crearTarea-container,
+#editarTarea-container,
+#atajos-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.5333333333);
+  width: 100%;
+  height: 100dvh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+#crearTarea-container.appear,
+#editarTarea-container.appear,
+#atajos-container.appear {
+  animation: appear 0.3s ease forwards;
+}
+#crearTarea-container.disappear,
+#editarTarea-container.disappear,
+#atajos-container.disappear {
+  animation: appear 0.3s ease reverse forwards;
+}
+#crearTarea-container #crearTarea,
+#crearTarea-container #editarTarea,
+#crearTarea-container #atajos,
+#editarTarea-container #crearTarea,
+#editarTarea-container #editarTarea,
+#editarTarea-container #atajos,
+#atajos-container #crearTarea,
+#atajos-container #editarTarea,
+#atajos-container #atajos {
+  border: 3px solid #ae913c;
+  border-radius: 16px;
+  border-width: 5px;
+  background-color: #f8cf56;
+  width: 450px;
+  height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: wrap column;
+}
+#crearTarea-container #crearTarea h3,
+#crearTarea-container #editarTarea h3,
+#crearTarea-container #atajos h3,
+#editarTarea-container #crearTarea h3,
+#editarTarea-container #editarTarea h3,
+#editarTarea-container #atajos h3,
+#atajos-container #crearTarea h3,
+#atajos-container #editarTarea h3,
+#atajos-container #atajos h3 {
+  font-family: "Just Another Hand", sans-serif;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.5em 0 0.25em;
+  font-size: 2rem;
+  color: #000;
+}
+#crearTarea-container #crearTarea form,
+#crearTarea-container #editarTarea form,
+#crearTarea-container #atajos form,
+#editarTarea-container #crearTarea form,
+#editarTarea-container #editarTarea form,
+#editarTarea-container #atajos form,
+#atajos-container #crearTarea form,
+#atajos-container #editarTarea form,
+#atajos-container #atajos form {
+  width: 100%;
+  flex: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: nowrap column;
+}
+#crearTarea-container #crearTarea form .estado-container,
+#crearTarea-container #editarTarea form .estado-container,
+#crearTarea-container #atajos form .estado-container,
+#editarTarea-container #crearTarea form .estado-container,
+#editarTarea-container #editarTarea form .estado-container,
+#editarTarea-container #atajos form .estado-container,
+#atajos-container #crearTarea form .estado-container,
+#atajos-container #editarTarea form .estado-container,
+#atajos-container #atajos form .estado-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1em 0;
+}
+#crearTarea-container #crearTarea form .estado-container input[type=radio],
+#crearTarea-container #editarTarea form .estado-container input[type=radio],
+#crearTarea-container #atajos form .estado-container input[type=radio],
+#editarTarea-container #crearTarea form .estado-container input[type=radio],
+#editarTarea-container #editarTarea form .estado-container input[type=radio],
+#editarTarea-container #atajos form .estado-container input[type=radio],
+#atajos-container #crearTarea form .estado-container input[type=radio],
+#atajos-container #editarTarea form .estado-container input[type=radio],
+#atajos-container #atajos form .estado-container input[type=radio] {
+  display: none;
+}
+#crearTarea-container #crearTarea form .estado-container input[type=radio]:nth-child(1):checked + label,
+#crearTarea-container #editarTarea form .estado-container input[type=radio]:nth-child(1):checked + label,
+#crearTarea-container #atajos form .estado-container input[type=radio]:nth-child(1):checked + label,
+#editarTarea-container #crearTarea form .estado-container input[type=radio]:nth-child(1):checked + label,
+#editarTarea-container #editarTarea form .estado-container input[type=radio]:nth-child(1):checked + label,
+#editarTarea-container #atajos form .estado-container input[type=radio]:nth-child(1):checked + label,
+#atajos-container #crearTarea form .estado-container input[type=radio]:nth-child(1):checked + label,
+#atajos-container #editarTarea form .estado-container input[type=radio]:nth-child(1):checked + label,
+#atajos-container #atajos form .estado-container input[type=radio]:nth-child(1):checked + label {
+  border: 3px solid #ae913c;
+  border-radius: 16px;
+  background-color: #d3b049;
+}
+#crearTarea-container #crearTarea form .estado-container input[type=radio]:nth-child(3):checked + label,
+#crearTarea-container #editarTarea form .estado-container input[type=radio]:nth-child(3):checked + label,
+#crearTarea-container #atajos form .estado-container input[type=radio]:nth-child(3):checked + label,
+#editarTarea-container #crearTarea form .estado-container input[type=radio]:nth-child(3):checked + label,
+#editarTarea-container #editarTarea form .estado-container input[type=radio]:nth-child(3):checked + label,
+#editarTarea-container #atajos form .estado-container input[type=radio]:nth-child(3):checked + label,
+#atajos-container #crearTarea form .estado-container input[type=radio]:nth-child(3):checked + label,
+#atajos-container #editarTarea form .estado-container input[type=radio]:nth-child(3):checked + label,
+#atajos-container #atajos form .estado-container input[type=radio]:nth-child(3):checked + label {
+  border: 3px solid #a54e72;
+  border-radius: 16px;
+  background-color: #c95e8b;
+}
+#crearTarea-container #crearTarea form .estado-container input[type=radio]:nth-child(5):checked + label,
+#crearTarea-container #editarTarea form .estado-container input[type=radio]:nth-child(5):checked + label,
+#crearTarea-container #atajos form .estado-container input[type=radio]:nth-child(5):checked + label,
+#editarTarea-container #crearTarea form .estado-container input[type=radio]:nth-child(5):checked + label,
+#editarTarea-container #editarTarea form .estado-container input[type=radio]:nth-child(5):checked + label,
+#editarTarea-container #atajos form .estado-container input[type=radio]:nth-child(5):checked + label,
+#atajos-container #crearTarea form .estado-container input[type=radio]:nth-child(5):checked + label,
+#atajos-container #editarTarea form .estado-container input[type=radio]:nth-child(5):checked + label,
+#atajos-container #atajos form .estado-container input[type=radio]:nth-child(5):checked + label {
+  border: 3px solid #229b68;
+  border-radius: 16px;
+  background-color: #2abd7e;
+}
+#crearTarea-container #crearTarea form .estado-container label,
+#crearTarea-container #editarTarea form .estado-container label,
+#crearTarea-container #atajos form .estado-container label,
+#editarTarea-container #crearTarea form .estado-container label,
+#editarTarea-container #editarTarea form .estado-container label,
+#editarTarea-container #atajos form .estado-container label,
+#atajos-container #crearTarea form .estado-container label,
+#atajos-container #editarTarea form .estado-container label,
+#atajos-container #atajos form .estado-container label {
+  position: relative;
+  padding: 0.5em;
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+#crearTarea-container #crearTarea form .estado-container label:nth-child(2),
+#crearTarea-container #editarTarea form .estado-container label:nth-child(2),
+#crearTarea-container #atajos form .estado-container label:nth-child(2),
+#editarTarea-container #crearTarea form .estado-container label:nth-child(2),
+#editarTarea-container #editarTarea form .estado-container label:nth-child(2),
+#editarTarea-container #atajos form .estado-container label:nth-child(2),
+#atajos-container #crearTarea form .estado-container label:nth-child(2),
+#atajos-container #editarTarea form .estado-container label:nth-child(2),
+#atajos-container #atajos form .estado-container label:nth-child(2) {
+  border: 3px solid #d3b049;
+  border-radius: 16px;
+}
+#crearTarea-container #crearTarea form .estado-container label:nth-child(2):hover,
+#crearTarea-container #editarTarea form .estado-container label:nth-child(2):hover,
+#crearTarea-container #atajos form .estado-container label:nth-child(2):hover,
+#editarTarea-container #crearTarea form .estado-container label:nth-child(2):hover,
+#editarTarea-container #editarTarea form .estado-container label:nth-child(2):hover,
+#editarTarea-container #atajos form .estado-container label:nth-child(2):hover,
+#atajos-container #crearTarea form .estado-container label:nth-child(2):hover,
+#atajos-container #editarTarea form .estado-container label:nth-child(2):hover,
+#atajos-container #atajos form .estado-container label:nth-child(2):hover {
+  border: 3px solid #ae913c;
+  border-radius: 16px;
+  background-color: #d3b049;
+}
+#crearTarea-container #crearTarea form .estado-container label:nth-child(4),
+#crearTarea-container #editarTarea form .estado-container label:nth-child(4),
+#crearTarea-container #atajos form .estado-container label:nth-child(4),
+#editarTarea-container #crearTarea form .estado-container label:nth-child(4),
+#editarTarea-container #editarTarea form .estado-container label:nth-child(4),
+#editarTarea-container #atajos form .estado-container label:nth-child(4),
+#atajos-container #crearTarea form .estado-container label:nth-child(4),
+#atajos-container #editarTarea form .estado-container label:nth-child(4),
+#atajos-container #atajos form .estado-container label:nth-child(4) {
+  border: 3px solid #c95e8b;
+  border-radius: 16px;
+}
+#crearTarea-container #crearTarea form .estado-container label:nth-child(4):hover,
+#crearTarea-container #editarTarea form .estado-container label:nth-child(4):hover,
+#crearTarea-container #atajos form .estado-container label:nth-child(4):hover,
+#editarTarea-container #crearTarea form .estado-container label:nth-child(4):hover,
+#editarTarea-container #editarTarea form .estado-container label:nth-child(4):hover,
+#editarTarea-container #atajos form .estado-container label:nth-child(4):hover,
+#atajos-container #crearTarea form .estado-container label:nth-child(4):hover,
+#atajos-container #editarTarea form .estado-container label:nth-child(4):hover,
+#atajos-container #atajos form .estado-container label:nth-child(4):hover {
+  border: 3px solid #a54e72;
+  border-radius: 16px;
+  background-color: #c95e8b;
+}
+#crearTarea-container #crearTarea form .estado-container label:nth-child(6),
+#crearTarea-container #editarTarea form .estado-container label:nth-child(6),
+#crearTarea-container #atajos form .estado-container label:nth-child(6),
+#editarTarea-container #crearTarea form .estado-container label:nth-child(6),
+#editarTarea-container #editarTarea form .estado-container label:nth-child(6),
+#editarTarea-container #atajos form .estado-container label:nth-child(6),
+#atajos-container #crearTarea form .estado-container label:nth-child(6),
+#atajos-container #editarTarea form .estado-container label:nth-child(6),
+#atajos-container #atajos form .estado-container label:nth-child(6) {
+  border: 3px solid #2abd7e;
+  border-radius: 16px;
+}
+#crearTarea-container #crearTarea form .estado-container label:nth-child(6):hover,
+#crearTarea-container #editarTarea form .estado-container label:nth-child(6):hover,
+#crearTarea-container #atajos form .estado-container label:nth-child(6):hover,
+#editarTarea-container #crearTarea form .estado-container label:nth-child(6):hover,
+#editarTarea-container #editarTarea form .estado-container label:nth-child(6):hover,
+#editarTarea-container #atajos form .estado-container label:nth-child(6):hover,
+#atajos-container #crearTarea form .estado-container label:nth-child(6):hover,
+#atajos-container #editarTarea form .estado-container label:nth-child(6):hover,
+#atajos-container #atajos form .estado-container label:nth-child(6):hover {
+  border: 3px solid #229b68;
+  border-radius: 16px;
+  background-color: #2abd7e;
+}
+#crearTarea-container #crearTarea form .textoNota,
+#crearTarea-container #editarTarea form .textoNota,
+#crearTarea-container #atajos form .textoNota,
+#editarTarea-container #crearTarea form .textoNota,
+#editarTarea-container #editarTarea form .textoNota,
+#editarTarea-container #atajos form .textoNota,
+#atajos-container #crearTarea form .textoNota,
+#atajos-container #editarTarea form .textoNota,
+#atajos-container #atajos form .textoNota {
+  flex: auto;
+  width: 100%;
+  padding: 1em;
+}
+#crearTarea-container #crearTarea form .textoNota textarea,
+#crearTarea-container #editarTarea form .textoNota textarea,
+#crearTarea-container #atajos form .textoNota textarea,
+#editarTarea-container #crearTarea form .textoNota textarea,
+#editarTarea-container #editarTarea form .textoNota textarea,
+#editarTarea-container #atajos form .textoNota textarea,
+#atajos-container #crearTarea form .textoNota textarea,
+#atajos-container #editarTarea form .textoNota textarea,
+#atajos-container #atajos form .textoNota textarea {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  border: none;
+  outline: none;
+  font-size: 2rem;
+  font-weight: 900;
+  font-family: "Study-Alone", sans-serif;
+  color: #ae913c;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+#crearTarea-container #crearTarea form .textoNota textarea:focus,
+#crearTarea-container #editarTarea form .textoNota textarea:focus,
+#crearTarea-container #atajos form .textoNota textarea:focus,
+#editarTarea-container #crearTarea form .textoNota textarea:focus,
+#editarTarea-container #editarTarea form .textoNota textarea:focus,
+#editarTarea-container #atajos form .textoNota textarea:focus,
+#atajos-container #crearTarea form .textoNota textarea:focus,
+#atajos-container #editarTarea form .textoNota textarea:focus,
+#atajos-container #atajos form .textoNota textarea:focus {
+  color: #000;
+}
+#crearTarea-container #crearTarea form div,
+#crearTarea-container #editarTarea form div,
+#crearTarea-container #atajos form div,
+#editarTarea-container #crearTarea form div,
+#editarTarea-container #editarTarea form div,
+#editarTarea-container #atajos form div,
+#atajos-container #crearTarea form div,
+#atajos-container #editarTarea form div,
+#atajos-container #atajos form div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0em 0 1em;
+}
+#crearTarea-container #crearTarea form div button,
+#crearTarea-container #editarTarea form div button,
+#crearTarea-container #atajos form div button,
+#editarTarea-container #crearTarea form div button,
+#editarTarea-container #editarTarea form div button,
+#editarTarea-container #atajos form div button,
+#atajos-container #crearTarea form div button,
+#atajos-container #editarTarea form div button,
+#atajos-container #atajos form div button {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  font-family: "Study-Alone", sans-serif;
+  padding: 0.5em 1em;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #ae913c;
+  background-color: transparent;
+  border: none;
+  transition: all 0.3s ease;
+}
+#crearTarea-container #crearTarea form div button::before,
+#crearTarea-container #editarTarea form div button::before,
+#crearTarea-container #atajos form div button::before,
+#editarTarea-container #crearTarea form div button::before,
+#editarTarea-container #editarTarea form div button::before,
+#editarTarea-container #atajos form div button::before,
+#atajos-container #crearTarea form div button::before,
+#atajos-container #editarTarea form div button::before,
+#atajos-container #atajos form div button::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 100%;
+  height: 3px;
+  background-color: #ae913c;
+  transition: right 0.3s ease;
+}
+#crearTarea-container #crearTarea form div button:hover,
+#crearTarea-container #editarTarea form div button:hover,
+#crearTarea-container #atajos form div button:hover,
+#editarTarea-container #crearTarea form div button:hover,
+#editarTarea-container #editarTarea form div button:hover,
+#editarTarea-container #atajos form div button:hover,
+#atajos-container #crearTarea form div button:hover,
+#atajos-container #editarTarea form div button:hover,
+#atajos-container #atajos form div button:hover {
+  color: #000;
+}
+#crearTarea-container #crearTarea form div button:hover::before,
+#crearTarea-container #editarTarea form div button:hover::before,
+#crearTarea-container #atajos form div button:hover::before,
+#editarTarea-container #crearTarea form div button:hover::before,
+#editarTarea-container #editarTarea form div button:hover::before,
+#editarTarea-container #atajos form div button:hover::before,
+#atajos-container #crearTarea form div button:hover::before,
+#atajos-container #editarTarea form div button:hover::before,
+#atajos-container #atajos form div button:hover::before {
+  right: 0;
+}
+#crearTarea-container #crearTarea > .teclas,
+#crearTarea-container #editarTarea > .teclas,
+#crearTarea-container #atajos > .teclas,
+#editarTarea-container #crearTarea > .teclas,
+#editarTarea-container #editarTarea > .teclas,
+#editarTarea-container #atajos > .teclas,
+#atajos-container #crearTarea > .teclas,
+#atajos-container #editarTarea > .teclas,
+#atajos-container #atajos > .teclas {
+  flex: auto;
+  font-size: 1.5rem;
+  font-weight: 900;
+  width: 100%;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-flow: nowrap column;
+  gap: 1em;
+}
+
+#limpiar,
+#atajosBoton,
+#pdfGen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  width: 64px;
+  height: 64px;
+  background: #fff;
+  border: 3px solid #b3b3b3;
+  border-radius: 50%;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+#limpiar:hover,
+#atajosBoton:hover,
+#pdfGen:hover {
+  background: #bd2a2a;
+  border-color: #9b2222;
+}
+#limpiar span,
+#atajosBoton span,
+#pdfGen span {
+  transform: translate(0px, 1px);
+  color: #bd2a2a;
+  font-size: 2.25rem;
+  transition: all 0.3s linear;
+}
+#limpiar:hover span,
+#atajosBoton:hover span,
+#pdfGen:hover span {
+  font-size: 2.5rem;
+  color: #fff;
+}
+
+#atajosBoton {
+  bottom: 13em;
+}
+#atajosBoton:hover {
+  background: #f8cf56;
+  border-color: #d3b049;
+}
+#atajosBoton span {
+  color: #f8cf56;
+}
+#atajosBoton:hover span {
+  color: #fff;
+}
+
+#pdfGen {
+  bottom: 7em;
+}
+#pdfGen:hover {
+  background: #31de94;
+  border-color: #2abd7e;
+}
+#pdfGen span {
+  color: #31de94;
+}
+#pdfGen:hover span {
+  color: #fff;
+}
+
+.tablero {
+  display: flex;
+  justify-content: center;
+  align-items: space-between;
+  flex-flow: wrap row;
+  gap: 1em;
+  width: 90%;
+  min-height: 80vh;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: 2em auto;
+  padding: 1em;
+}
+
+.tarjeta {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-flow: wrap column;
+  flex: 1 1 400px;
+  min-height: 80dvh;
+  height: -moz-fit-content;
+  height: fit-content;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.tarjeta:nth-child(1) {
+  background: #f8cf56;
+  border: 3px solid #ae913c;
+  border-radius: 16px;
+  border-width: 5px;
+}
+.tarjeta:nth-child(1).hover {
+  border-style: dashed;
+}
+.tarjeta:nth-child(1) ::-webkit-scrollbar-thumb {
+  background: #f8cf56;
+}
+.tarjeta:nth-child(1) h2 {
+  background-color: #d3b049;
+}
+.tarjeta:nth-child(1) > * > .tarea {
+  border: 3px solid #d3b049;
+  border-radius: 16px;
+}
+.tarjeta:nth-child(1) > * > .tarea:hover {
+  border: 3px solid #ae913c;
+  border-radius: 16px;
+}
+.tarjeta:nth-child(1) p:not(.no-pin)::before {
+  content: "❗";
+  margin-right: 0.5em;
+}
+.tarjeta:nth-child(1) .opciones {
+  color: #ae913c;
+}
+.tarjeta:nth-child(1) hr {
+  width: 100%;
+  height: 5px;
+  background-color: #ae913c;
+  border: none;
+}
+.tarjeta:nth-child(2) {
+  background: #ec6fa3;
+  border: 3px solid #a54e72;
+  border-radius: 16px;
+  border-width: 5px;
+}
+.tarjeta:nth-child(2).hover {
+  border-style: dashed;
+}
+.tarjeta:nth-child(2) ::-webkit-scrollbar-thumb {
+  background: #ec6fa3;
+}
+.tarjeta:nth-child(2) h2 {
+  background-color: #c95e8b;
+}
+.tarjeta:nth-child(2) > * > .tarea {
+  border: 3px solid #c95e8b;
+  border-radius: 16px;
+}
+.tarjeta:nth-child(2) > * > .tarea:hover {
+  border: 3px solid #a54e72;
+  border-radius: 16px;
+}
+.tarjeta:nth-child(2) p::before {
+  content: "✏️";
+  margin-right: 0.5em;
+}
+.tarjeta:nth-child(2) .opciones {
+  color: #a54e72;
+}
+.tarjeta:nth-child(2) hr {
+  width: 100%;
+  height: 5px;
+  background-color: #a54e72;
+  border: none;
+}
+.tarjeta:nth-child(3) {
+  background: #31de94;
+  border: 3px solid #229b68;
+  border-radius: 16px;
+  border-width: 5px;
+}
+.tarjeta:nth-child(3).hover {
+  border-style: dashed;
+}
+.tarjeta:nth-child(3) ::-webkit-scrollbar-thumb {
+  background: #31de94;
+}
+.tarjeta:nth-child(3) h2 {
+  background-color: #2abd7e;
+}
+.tarjeta:nth-child(3) > * > .tarea {
+  border: 3px solid #2abd7e;
+  border-radius: 16px;
+}
+.tarjeta:nth-child(3) > * > .tarea:hover {
+  border: 3px solid #229b68;
+  border-radius: 16px;
+}
+.tarjeta:nth-child(3) p::before {
+  content: "✔️";
+  display: inline-block;
+  margin-right: 0.5em;
+}
+.tarjeta:nth-child(3) p {
+  position: relative;
+  color: #229b68;
+  -webkit-text-decoration: line-through rgba(0, 0, 0, 0.2941176471) 2px;
+          text-decoration: line-through rgba(0, 0, 0, 0.2941176471) 2px;
+}
+.tarjeta:nth-child(3) .opciones {
+  color: #229b68;
+}
+.tarjeta:nth-child(3) hr {
+  width: 100%;
+  height: 5px;
+  background-color: #229b68;
+  border: none;
+}
+.tarjeta h2 {
+  width: 100%;
+  font-family: "Just Another Hand", sans-serif;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.5em 0 0.25em;
+  font-size: 3rem;
+  color: #000;
+  transition: all 0.3s ease;
+}
+
+.tarea-container {
+  width: 100%;
+  overflow: hidden;
+  max-height: calc(80vh - 97px - 1em);
+  scrollbar-gutter: stable;
+  overflow-y: hidden;
+  flex: auto;
+  padding: 1em;
+  transition: all 0.3s ease;
+}
+.tarea-container:hover {
+  overflow-y: auto;
+}
+.tarea-container .tarea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: nowrap row;
+  width: 100%;
+  margin-bottom: 1em;
+  padding: 0.5em;
+  transition: all 0.3s ease;
+}
+.tarea-container .tarea:not(.anadir) {
+  cursor: move;
+}
+.tarea-container .tarea:hover .contenido > .opciones {
+  display: flex;
+}
+.tarea-container .tarea .contenido {
+  width: 100%;
+  font-size: 1.4rem;
+  text-wrap: pretty;
+  -webkit-hyphens: auto;
+          hyphens: auto;
+  overflow: hidden;
+}
+.tarea-container .tarea .contenido .opciones {
+  margin-top: 0.35em;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: nowrap row;
+  gap: 1.5em;
+  font-size: 1rem;
+  font-weight: 900;
+  transition: all 0.3s ease;
+}
+.tarea-container .tarea .contenido .opciones .botones span {
+  font-size: 1.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.tarea-container .tarea .contenido .opciones .botones span:hover:first-child {
+  color: #7073f6;
+}
+.tarea-container .tarea .contenido .opciones .botones span:hover:last-child {
+  color: #de3131;
+}
+.tarea-container .tarea.anadir {
+  cursor: pointer;
+  font-size: 1.3rem;
+  font-weight: 900;
+}
+.tarea-container .tarea.anadir > img {
+  width: 20px;
+  height: auto;
+  margin-right: 0.25em;
+  transition: all 0.3s ease;
+}
+.tarea-container .tarea.anadir:hover img {
+  transform: rotate(90deg);
+}
+
+.notyf__toast {
+  border-radius: 8px;
+}
+
+kbd {
+  white-space: nowrap;
+  font-family: "Study-Alone", sans-serif;
+  color: #fff;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+       user-select: none;
+  background: linear-gradient(#777, #555);
+  border-radius: 3px;
+  height: 28px;
+  margin: 0 2px;
+  padding: 3px 8px;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 900;
+  display: inline-block;
+  position: relative;
+  top: -2px;
+  box-shadow: inset 0 -2px rgba(0, 0, 0, 0.2666666667), 0 2px #333;
+}
+kbd:hover {
+  background: linear-gradient(#888, #666);
+}
+kbd:active {
+  translate: 0 2px;
+  box-shadow: inset 0 -2px rgba(0, 0, 0, 0.2666666667), 0 0 #333;
+}
+
+.rojo {
+  color: #de3131;
+}/*# sourceMappingURL=styles.css.map */

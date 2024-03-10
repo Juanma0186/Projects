@@ -1,0 +1,27 @@
+[
+  {
+    "usuario": "sara",
+    "apellido": "López",
+    "promotor": "Palomitas",
+    "entidad": "Caixa",
+    "fecha": "2024-02-22T02:09:12Z",
+    "mes": "Enero",
+    "cantidad": 150
+  },
+  {
+    "usuario": "leandro",
+    "promotor": "Juguetes",
+    "entidad": "Caixa",
+    "mes": "Enero",
+    "fecha": "2024-02-23T15:26:25Z",
+    "cantidad": 50
+  },
+  {
+    "usuario": "leandro",
+    "promotor": "Juguetes",
+    "entidad": "Caixa",
+    "mes": "Febrero",
+    "fecha": "2024-02-23T18:27:22.378110Z",
+    "cantidad": 125
+  }
+]

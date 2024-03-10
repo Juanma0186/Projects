@@ -1,0 +1,180 @@
+<main class="min-h-[calc(100vh_-_75px)] bg-[#f2f6fc] dark:dark:bg-neutral-700 overflow-x-hidden">
+  @if (bancoData && bancoData.length > 0){
+  <h2 class="flex items-center py-6 pl-6 text-4xl font-semibold dark:text-white gap-x-2 ">
+    <img class="object-scale-down p-1 bg-white rounded-full shadow-lg size-12" src="assets/bancos/{{banco}}.webp"
+      alt="Logo del banco {{banco | titlecase}}" />
+    <span class="font-bold">{{banco | titlecase}}</span>
+  </h2>
+
+  <section class="flex flex-wrap items-start justify-start gap-6 p-6">
+
+    <!--Card Total Usuarios-->
+    <article class="overflow-hidden rounded-lg shadow-xl animate-fade-left bg-neutral-100 dark:bg-neutral-600">
+      <h3 class="flex items-center justify-start w-full p-4 font-semibold gap-x-2 bg-turquoise-500">
+        <span class="-translate-y-[1.5px] material-icons">
+          people
+        </span>
+        Cantidad de usuarios
+      </h3>
+      <div class="flex flex-col items-start justify-center p-6 gap-x-2">
+        <p class="w-full text-2xl font-semibold text-center dark:text-white">
+          <span class="text-turquoise-500">{{cantidadUsuarios}}</span> usuarios totales
+        </p>
+      </div>
+    </article>
+
+    <!--Card Total Promotores-->
+    <article
+      class="overflow-hidden rounded-lg shadow-xl animate-fade-left animate-delay-200 bg-neutral-100 dark:bg-neutral-600">
+      <h3 class="flex items-center justify-start w-full p-4 font-semibold gap-x-2 bg-steel_pink-500">
+        <span class="-translate-y-[1.5px] material-icons">
+          apartment
+        </span>
+        Cantidad de promotores
+      </h3>
+      <div class="flex flex-col items-start justify-center p-6 gap-x-2">
+        <p class="w-full text-2xl font-semibold text-center dark:text-white">
+          <span class="text-steel_pink-500">{{cantidaPromotores.length}}</span> promotores
+        </p>
+      </div>
+    </article>
+
+    <!--Card Total Promotores-->
+    <article
+      class="overflow-hidden rounded-lg shadow-xl animate-fade-left animate-delay-300 bg-neutral-100 dark:bg-neutral-600">
+      <h3 class="flex items-center justify-start w-full p-4 font-semibold gap-x-2 bg-process_cyan-500">
+        <span class="-translate-y-[1.5px] material-icons">
+          upload
+        </span>
+        Subir datos
+      </h3>
+      <div class="flex flex-col items-start justify-center gap-x-2">
+        <label for="fileZone"
+          class="flex items-center justify-center w-full p-4 cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-500">
+          <input type="file" id="fileZone" #fileInput (change)="onFileSelected($event)" class="hidden" accept=".json">
+          @if (selectedFile) {
+          <div class="flex flex-col items-center justify-center gap-y-4">
+            <p class="w-full text-lg font-semibold text-center dark:text-white">
+              <span class="text-process_cyan-500">{{selectedFile.name}}</span>
+            </p>
+            <button (click)="onUpload($event)"
+              class="px-4 py-2 max-w-[75px] font-bold text-white rounded bg-process_cyan-500 hover:bg-process_cyan-700"
+              [disabled]="isLoading">
+              Subir
+            </button>
+          </div>
+          }@else{
+          <p class="w-full text-lg font-semibold text-center dark:text-white">
+            <span class="text-process_cyan-500">Haz click para subir un archivo</span>
+          </p>
+          }
+        </label>
+      </div>
+    </article>
+
+  </section>
+
+  <section class="flex flex-wrap items-start justify-start w-full gap-6 p-6">
+    <div
+      class="flex-1 min-w-[700px] overflow-hidden rounded-lg animate-fade-left animate-delay-500 shadow-xl bg-neutral-100 dark:bg-neutral-600">
+      <h3 class="flex items-center justify-start w-full p-4 font-semibold gap-x-2 bg-bright_pink_(crayola)-500">
+        <span class="-translate-y-[1.5px] material-icons">
+          history
+        </span>
+        Historial de aportaciones
+      </h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-center">
+          <thead class="">
+            <tr>
+              <th class="px-6 py-3 font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white/70">
+                Beneficiario</th>
+              <th class="px-6 py-3 font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white/70">
+                Entidad Financiera
+              </th>
+              <th class="px-6 py-3 font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white/70">
+                Mes</th>
+              <th class="px-6 py-3 font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white/70">
+                Aportaciones Mensuales</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y-2 dark:divide-neutral-600 bg-neutral-300 dark:bg-neutral-500">
+            @for (data of bancoData; track $index) {
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-lg text-gray-900 dark:text-white">{{data.last_name | titlecase}},
+                  {{data.usuario | titlecase}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-lg text-gray-900 dark:text-white">{{data.entidad | uppercase}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-lg text-gray-900 dark:text-white">{{data.mes}}
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-lg text-gray-900 dark:text-white">{{data.cantidad | currency:'EUR'}}</div>
+              </td>
+              }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div
+      class="flex-1 min-w-[300px] overflow-hidden  animate-fade-left animate-delay-[700ms] rounded-lg shadow-xl bg-neutral-100 dark:bg-neutral-600">
+      <h3 class="flex items-center justify-start w-full p-4 font-semibold gap-x-2 bg-process_cyan-500">
+        <span class="-translate-y-[1.5px] material-icons">
+          people
+        </span>
+        Listado de usuarios
+      </h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-center">
+          <thead class="">
+            <tr>
+              <th class="px-6 py-3 font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white/70">
+                Nombre</th>
+              <th class="px-6 py-3 font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white/70">
+                Apellido
+              </th>
+              <th class="px-6 py-3 font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white/70">
+                Promotor
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y-2 dark:divide-neutral-600 bg-neutral-300 dark:bg-neutral-500">
+            @for (data of listaUsuarios; track $index) {
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-lg text-gray-900 dark:text-white">{{data.first_name | titlecase}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-lg text-gray-900 dark:text-white">{{data.last_name | titlecase}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-lg text-gray-900 dark:text-white">{{data.promotor }}</div>
+              </td>
+              }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </section>
+  }
+
+  @if (isAdmin) {
+  <section class="px-6 py-2">
+    <button
+      class="fixed z-50 flex items-center justify-center px-4 py-2 text-white transition rounded-full shadow-md bottom-32 animate-fade-up animate-delay-500 right-4 size-12 material-icons bg-turquoise-500 hover:bg-turquoise-400"
+      (click)="goBack()">
+      arrow_back
+    </button>
+    <app-fraude />
+  </section>
+  }
+  <app-chat></app-chat>
+
+
+</main>

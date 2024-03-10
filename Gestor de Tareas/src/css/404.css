@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+@font-face {
+  font-family: "Study-Alone";
+  src: url("../fonts/StudyAlone.woff2");
+  font-display: swap;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  scrollbar-gutter: stable;
+  min-height: 100dvh;
+  font-family: "Study-Alone", sans-serif;
+  background: linear-gradient(135deg, #7073f6 21px, #4d51c0 22px, #4d51c0 24px, transparent 24px, transparent 67px, #4d51c0 67px, #4d51c0 69px, transparent 69px), linear-gradient(225deg, #7073f6 21px, #4d51c0 22px, #4d51c0 24px, transparent 24px, transparent 67px, #4d51c0 67px, #4d51c0 69px, transparent 69px) 0 64px;
+  background-color: #7073f6;
+  background-size: 64px 128px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.tarjeta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: wrap column;
+  min-height: 400px;
+  width: 400px;
+  height: -moz-fit-content;
+  height: fit-content;
+  overflow: hidden;
+  background: #de3131;
+  border: 3px solid #ae1f1f;
+  border-radius: 16px;
+  border-width: 5px;
+}
+.tarjeta h1 {
+  font-family: "Just Another Hand", sans-serif;
+  font-size: 3rem;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 0.5em 0 0.25em;
+}
+.tarjeta hr {
+  width: 100%;
+  height: 5px;
+  background-color: #ae1f1f;
+  border: none;
+}
+.tarjeta p {
+  padding: 1em;
+  font-family: "Study-Alone", sans-serif;
+  font-size: 3rem;
+  text-wrap: pretty;
+  text-align: center;
+  flex: auto;
+}
+.tarjeta a {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 0.5em 0em;
+  padding: 0.5em 1em;
+  background: white;
+  border: 3px solid #bebebe;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.tarjeta a:hover {
+  background: #bebebe;
+}/*# sourceMappingURL=404.css.map */
